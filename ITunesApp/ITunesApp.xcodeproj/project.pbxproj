@@ -52,7 +52,7 @@
 		757479002A311F6A002E0E06 /* ITunesAppUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ITunesAppUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		757479042A311F6A002E0E06 /* ITunesAppUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ITunesAppUITests.swift; sourceTree = "<group>"; };
 		757479062A311F6A002E0E06 /* ITunesAppUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ITunesAppUITestsLaunchTests.swift; sourceTree = "<group>"; };
-		757479142A31E991002E0E06 /* ITunesAPI */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = ITunesAPI; sourceTree = "<group>"; };
+		75BC133D2A31ED85002F411C /* ITunesAPI */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = ITunesAPI; path = ../ITunesAPI; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -138,7 +138,7 @@
 		757479132A31E991002E0E06 /* Packages */ = {
 			isa = PBXGroup;
 			children = (
-				757479142A31E991002E0E06 /* ITunesAPI */,
+				75BC133D2A31ED85002F411C /* ITunesAPI */,
 			);
 			name = Packages;
 			sourceTree = "<group>";
