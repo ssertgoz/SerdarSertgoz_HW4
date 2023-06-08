@@ -6,12 +6,24 @@
 //
 
 import UIKit
+import ITunesAPI
 
 class ViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
+        
+        let service = ITunesService()
+        service.fetchSearchRsults(text: "tarkan") { response in
+            switch response {
+            case .success(let results):
+                print(results)
+            case .failure(_):
+                print("")
+                
+            }
+        }
+        
     }
 
 

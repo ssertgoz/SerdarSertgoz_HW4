@@ -17,6 +17,7 @@
 		757478FB2A311F6A002E0E06 /* ITunesAppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 757478FA2A311F6A002E0E06 /* ITunesAppTests.swift */; };
 		757479052A311F6A002E0E06 /* ITunesAppUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 757479042A311F6A002E0E06 /* ITunesAppUITests.swift */; };
 		757479072A311F6A002E0E06 /* ITunesAppUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 757479062A311F6A002E0E06 /* ITunesAppUITestsLaunchTests.swift */; };
+		75BC133C2A31E9EB002F411C /* ITunesAPI in Frameworks */ = {isa = PBXBuildFile; productRef = 75BC133B2A31E9EB002F411C /* ITunesAPI */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -51,6 +52,7 @@
 		757479002A311F6A002E0E06 /* ITunesAppUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ITunesAppUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		757479042A311F6A002E0E06 /* ITunesAppUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ITunesAppUITests.swift; sourceTree = "<group>"; };
 		757479062A311F6A002E0E06 /* ITunesAppUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ITunesAppUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		757479142A31E991002E0E06 /* ITunesAPI */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = ITunesAPI; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,6 +60,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				75BC133C2A31E9EB002F411C /* ITunesAPI in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -81,10 +84,12 @@
 		757478D42A311F69002E0E06 = {
 			isa = PBXGroup;
 			children = (
+				757479132A31E991002E0E06 /* Packages */,
 				757478DF2A311F69002E0E06 /* ITunesApp */,
 				757478F92A311F6A002E0E06 /* ITunesAppTests */,
 				757479032A311F6A002E0E06 /* ITunesAppUITests */,
 				757478DE2A311F69002E0E06 /* Products */,
+				75BC133A2A31E9EB002F411C /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -130,6 +135,21 @@
 			path = ITunesAppUITests;
 			sourceTree = "<group>";
 		};
+		757479132A31E991002E0E06 /* Packages */ = {
+			isa = PBXGroup;
+			children = (
+				757479142A31E991002E0E06 /* ITunesAPI */,
+			);
+			name = Packages;
+			sourceTree = "<group>";
+		};
+		75BC133A2A31E9EB002F411C /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -146,6 +166,9 @@
 			dependencies = (
 			);
 			name = ITunesApp;
+			packageProductDependencies = (
+				75BC133B2A31E9EB002F411C /* ITunesAPI */,
+			);
 			productName = ITunesApp;
 			productReference = 757478DD2A311F69002E0E06 /* ITunesApp.app */;
 			productType = "com.apple.product-type.application";
@@ -600,6 +623,13 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		75BC133B2A31E9EB002F411C /* ITunesAPI */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = ITunesAPI;
+		};
+/* End XCSwiftPackageProductDependency section */
 
 /* Begin XCVersionGroup section */
 		757478E92A311F69002E0E06 /* ITunesApp.xcdatamodeld */ = {
