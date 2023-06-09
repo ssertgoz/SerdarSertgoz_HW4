@@ -1,11 +1,11 @@
 import XCTest
-@testable import ITunesAPI
+@testable import ImageDownloader
 
-final class ITunesAPITests: XCTestCase {
+final class ImageDownloaderTests: XCTestCase {
     func testExample() throws {
         // This is an example of a functional test case.
         // Use XCTAssert and related functions to verify your tests produce the correct
         // results.
-        //XCTAssertEqual(ITunesAPI().text, "Hello, World!")
+        XCTAssertEqual(ImageDownloader().text, "Hello, World!")
     }
 }

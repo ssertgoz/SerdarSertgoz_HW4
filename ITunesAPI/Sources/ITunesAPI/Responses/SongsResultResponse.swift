@@ -8,8 +8,8 @@
 import Foundation
 
 public struct SongsResultResponse: Decodable {
-    public let results: [Song]
-    public let resultCount: Int
+    public let results: [Song]?
+    public let resultCount: Int?
 
     private enum RootCodingKeys: String, CodingKey {
         case resultCount, results
