@@ -21,12 +21,14 @@ fileprivate let service: ITunesServiceProtocol = API.shared
 
 final class SearchInteractor{
     weak var output: SearchInteractorOutputProtocol?
-}
     
+}
+
 
 extension SearchInteractor: SearchInteractorProtocol{
     
     func fetchSearchResults(text: String) {
+       
         service.fetchSearchResults(text: text) { [weak self] response in
             guard let self else {return}
             self.output?.handleSearchResult(response)

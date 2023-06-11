@@ -33,6 +33,7 @@ final class SearchPresenter{
     unowned var view: SearchViewControllerProtocol?
     let router: SearchRouterProtocol?
     private let interactor: SearchInteractorProtocol?
+    private var timer: Timer?
     
     init(view: SearchViewControllerProtocol?, interactor: SearchInteractorProtocol, router: SearchRouterProtocol) {
         self.view = view
@@ -44,14 +45,20 @@ final class SearchPresenter{
 
 extension SearchPresenter: SearchPresenterProtocol{
     
+    
     func viewDidLoad() {
         view?.setupCollectionView()
         view?.setTitle("iTunes Search")
     }
     
     func load(text: String) {
-        view?.showLoadingView()
-        interactor?.fetchSearchResults(text: text)
+        timer?.invalidate()
+        timer = Timer.scheduledTimer(withTimeInterval: 0.3, repeats: false) { [weak self] _ in
+            guard let self else { return }
+            self.view?.showLoadingView()
+            self.interactor?.fetchSearchResults(text: text)
+        }
+        
     }
     
     var numberOfItems: Int {
