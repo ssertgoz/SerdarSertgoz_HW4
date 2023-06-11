@@ -20,12 +20,14 @@ class SearchViewController: BaseViewController{
     
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var collectionView: UICollectionView!
-    
+
     var presenter: SearchPresenterProtocol!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        presenter.viewDidLoad()
         presenter.load(text: "tarkan")
+        
         
     }
     
@@ -38,8 +40,20 @@ extension SearchViewController: UICollectionViewDataSource, UICollectionViewDele
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        var cell = collectionView.dequeCell(cellType: SongViewCell.self, indexPath: indexPath)
-        cell.configure(artistName: presenter.songAt(indexPath.row)., trackName: <#T##String#>, collectionName: <#T##String#>, isPlaying: <#T##Bool#>)
+        let cell = collectionView.dequeCell(cellType: SongViewCell.self, indexPath: indexPath)
+        let interactor = SongViewCellInteractor()
+        if let song = presenter.songAt(indexPath.row){
+            let presenter = SongViewCellPresenter(view: cell, interactor: interactor, song: song)
+            cell.cellPresenter = presenter
+            interactor.output = presenter
+        }
+        return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        print("test")
+        presenter.didSelectRowAt(index: indexPath.row)
+        
     }
     
     
@@ -63,7 +77,7 @@ extension SearchViewController: SearchViewControllerProtocol {
             guard let self else { return }
             self.collectionView.reloadData()
         }
-        print(presenter.songAt(1))
+        print(presenter.numberOfItems)
     }
 }
 

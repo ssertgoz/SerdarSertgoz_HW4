@@ -7,18 +7,18 @@
 
 import Foundation
 import UIKit
+import ITunesAPI
 
-protocol SearchRouterProtocol{
-    //func navigateToDetail(with id: String)
+enum SearchRoutes {
+    case detailScreen(source: Song) //TODO: change
 }
 
-final class SearchRouter: SearchRouterProtocol{
-    weak var navigationController: UINavigationController?
-    private weak var searchCV: SearchViewController?
-    
-    init(navigationController: UINavigationController? = nil) {
-        self.navigationController = navigationController
-    }
+protocol SearchRouterProtocol{
+    func navigateToDetail(_ route: SearchRoutes)
+}
+
+final class SearchRouter{
+    private weak var searchVC: SearchViewController?
     
     static func createModule() -> SearchViewController {
         let storyBoard = UIStoryboard(name: "SearchViewController", bundle: nil)
@@ -28,9 +28,21 @@ final class SearchRouter: SearchRouterProtocol{
         let preseneter = SearchPresenter(view: view, interactor: interactor, router: router)
         view?.presenter = preseneter
         interactor.output =  preseneter
+        router.searchVC = view
+        
         return view!
     }
 }
 
-extension SearchRouter{
+extension SearchRouter: SearchRouterProtocol{
+    func navigateToDetail(_ route: SearchRoutes) {
+        switch route {
+        case .detailScreen(let source):
+            print("test4")
+            let detailVC = DetailRouter.createModule()
+            detailVC.source = source
+            searchVC?.navigationController?.pushViewController(detailVC, animated: true)
+        }
+    }
+    
 }

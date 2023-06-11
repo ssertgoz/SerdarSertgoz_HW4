@@ -9,6 +9,7 @@ import Foundation
 
 public struct Song: Decodable {
     let kind: String?
+    let trackId: Double?
     let artistName: String?
     let collectionName: String?
     let trackName: String?
@@ -25,7 +26,7 @@ public struct Song: Decodable {
     
     private enum CodingKeys: String, CodingKey {
         case kind, artistName, collectionName, trackName, previewUrl, artworkUrl100, collectionPrice
-        case trackPrice, releaseDate, trackCount, trackNumber, country, currency, primaryGenreName
+        case trackPrice, releaseDate, trackCount, trackNumber, country, currency, primaryGenreName, trackId
     }
 }
 public extension Song {
@@ -83,5 +84,9 @@ public extension Song {
     
     var getPrimaryGenre: String? {
         return primaryGenreName
+    }
+    
+    var getTrackId: Double? {
+        return trackId
     }
 }

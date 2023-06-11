@@ -9,12 +9,13 @@ import Foundation
 import ITunesAPI
 
 protocol SearchPresenterProtocol: AnyObject{
+    func viewDidLoad()
     var numberOfItems: Int { get }
     var cellPadding: Double { get }
     func load(text: String)
     func songAt(_ index: Int) -> Song?
     func calculateCellHeight(collectionViewWidth: Double) -> (width: Double, height: Double)
-    func rowTapped(title: String)
+    func didSelectRowAt(index: Int)
 }
 
 extension SearchPresenter {
@@ -42,6 +43,12 @@ final class SearchPresenter{
 
 
 extension SearchPresenter: SearchPresenterProtocol{
+    
+    func viewDidLoad() {
+        view?.setupCollectionView()
+        view?.setTitle("iTunes Search")
+    }
+    
     func load(text: String) {
         view?.showLoadingView()
         interactor?.fetchSearchResults(text: text)
@@ -67,8 +74,10 @@ extension SearchPresenter: SearchPresenterProtocol{
         return (width: cellWitdh, height: Constants.cellTitleHeight + posterImageHeight)
     }
     
-    func rowTapped(title: String) {
-        //TODO
+    func didSelectRowAt(index: Int) {
+        guard let source = songAt(index) else { return }
+        
+        router?.navigateToDetail(.detailScreen(source: source))
     }
     
     
