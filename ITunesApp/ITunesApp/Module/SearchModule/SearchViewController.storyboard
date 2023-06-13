@@ -22,13 +22,13 @@
                                 <subviews>
                                     <searchBar contentMode="redraw" searchBarStyle="minimal" placeholder="Search" translatesAutoresizingMaskIntoConstraints="NO" id="l1n-qT-HmR">
                                         <rect key="frame" x="12" y="12" width="369" height="56"/>
+                                        <color key="barTintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <textInputTraits key="textInputTraits"/>
                                         <connections>
                                             <outlet property="delegate" destination="Y6W-OH-hqX" id="G9q-RF-tKh"/>
                                         </connections>
                                     </searchBar>
                                 </subviews>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <constraints>
                                     <constraint firstAttribute="bottom" secondItem="l1n-qT-HmR" secondAttribute="bottom" constant="12" id="MPh-iO-Anj"/>
                                     <constraint firstItem="l1n-qT-HmR" firstAttribute="leading" secondItem="qTO-sz-Tob" secondAttribute="leading" constant="12" id="XXR-yP-lYK"/>
@@ -59,7 +59,7 @@
                             </collectionView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="qTO-sz-Tob" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" id="CQa-vI-rLB"/>
                             <constraint firstItem="qTO-sz-Tob" firstAttribute="trailing" secondItem="vDu-zF-Fre" secondAttribute="trailing" id="JBr-8n-qtU"/>

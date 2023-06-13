@@ -23,9 +23,10 @@ public struct Song: Decodable {
     let country: String?
     let currency: String?
     let primaryGenreName: String?
+    let trackTimeMillis: Int?
     
     private enum CodingKeys: String, CodingKey {
-        case kind, artistName, collectionName, trackName, previewUrl, artworkUrl100, collectionPrice
+        case kind, artistName, collectionName, trackName, previewUrl, artworkUrl100, collectionPrice,trackTimeMillis
         case trackPrice, releaseDate, trackCount, trackNumber, country, currency, primaryGenreName, trackId
     }
 }
@@ -89,4 +90,21 @@ public extension Song {
     var getTrackId: Double? {
         return trackId
     }
+    
+    //TODO: Kaldır
+    
+//    var getTrackTime: String? {
+//        return formatMilliseconds(trackTimeMillis)
+//    }
+//
+//    private func formatMilliseconds(_ milliseconds: Int?) -> String {
+//        guard let milliseconds = milliseconds else { return "00:00"}
+//        let totalSeconds = milliseconds / 1000
+//        let minutes = (totalSeconds % 3600) / 60
+//        let seconds = totalSeconds % 60
+//
+//        let formattedString = String(format: "%02d:%02d", minutes, seconds)
+//        return formattedString
+//    }
+    
 }

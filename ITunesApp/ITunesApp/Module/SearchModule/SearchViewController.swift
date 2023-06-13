@@ -16,6 +16,7 @@ protocol SearchViewControllerProtocol: AnyObject {
     func setupCollectionView()
 }
 
+
 class SearchViewController: BaseViewController{
     
     @IBOutlet weak var searchBar: UISearchBar!
@@ -42,6 +43,10 @@ extension SearchViewController: UICollectionViewDataSource, UICollectionViewDele
         if let song = presenter.songAt(indexPath.row){
             let presenter = SongViewCellPresenter(view: cell, interactor: interactor, song: song)
             cell.cellPresenter = presenter
+            cell.delegate = self
+            cell.indexPath = indexPath
+            cell.playingIndex = self.presenter.playingMusicIndex
+            cell.setPlayImage(self.presenter.playingMusicIndex == indexPath.row ? true : false)
             interactor.output = presenter
         }
         return cell
@@ -49,7 +54,6 @@ extension SearchViewController: UICollectionViewDataSource, UICollectionViewDele
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         presenter.didSelectRowAt(index: indexPath.row)
-        
     }
     
     
@@ -81,5 +85,21 @@ extension SearchViewController: SearchViewControllerProtocol {
             self.collectionView.reloadData()
         }
     }
+}
+
+extension SearchViewController: SongViewCellDelegate{
+    func playButtonTapped(at indexPath: IndexPath) {
+//        presenter.playingMusicIndex = indexPath.row
+//        reloadData()
+//        if(indexPath.row != presenter.playingMusicIndex){
+//            //presenter.playingMusicIndex = indexPath.row
+//            //reloadData()
+//        }
+        
+        print(indexPath.row)
+        
+    }
+    
+    
 }
 

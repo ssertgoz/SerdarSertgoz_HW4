@@ -12,6 +12,7 @@ protocol SearchPresenterProtocol: AnyObject{
     func viewDidLoad()
     var numberOfItems: Int { get }
     var cellPadding: Double { get }
+    var playingMusicIndex: Int { get set}
     func load(text: String)
     func songAt(_ index: Int) -> Song?
     func calculateCellHeight(collectionViewWidth: Double) -> (width: Double, height: Double)
@@ -32,6 +33,7 @@ final class SearchPresenter{
     private var songs: [Song] = []
     unowned var view: SearchViewControllerProtocol?
     let router: SearchRouterProtocol?
+    private var playingIndex: Int?
     private let interactor: SearchInteractorProtocol?
     private var timer: Timer?
     
@@ -44,6 +46,15 @@ final class SearchPresenter{
 
 
 extension SearchPresenter: SearchPresenterProtocol{
+    var playingMusicIndex: Int {
+        get {
+            self.playingIndex ?? -1
+        }
+        set {
+            self.playingIndex = newValue
+        }
+    }
+    
     
     
     func viewDidLoad() {

@@ -11,10 +11,14 @@ protocol SongViewCellProtocol: AnyObject{
     func setArtistName(_ name: String)
     func setTrackName(_ name: String)
     func setCollectionName(_ name: String)
-    func setImage(_ image: UIImage)
+    func setImage(_ url: String?)
     func setPlayImage(_ isPlaying: Bool)
     func startPlayAnimation(startAngle: Double, endAngle: Double, progress: Double)
     func stopPlayAnimation()
+}
+
+protocol SongViewCellDelegate: AnyObject {
+    func playButtonTapped(at indexPath: IndexPath)
 }
 
 
@@ -26,28 +30,34 @@ class SongViewCell: UICollectionViewCell {
     @IBOutlet weak var image: UIImageView!
     @IBOutlet weak var playImage: UIImageView!
     @IBOutlet weak var playButon: UIButton!
-    private var progressLayer: CAShapeLayer!
-    private var circularPath: UIBezierPath!
+    weak var delegate: SongViewCellDelegate?
+    var indexPath: IndexPath?
+    var playingIndex: Int?
     
     
     var cellPresenter: SongViewCellPresenterProtocol! {
-            didSet {
-                cellPresenter.load()
-                self.layer.cornerRadius = 12
-                image.layer.cornerRadius = 12
-                self.contentView.isUserInteractionEnabled = true
-//                let tapGesture = UITapGestureRecognizer(target: self, action: #selector(handleTap(_:)))
-//                playImage.addGestureRecognizer(tapGesture)
-//                playImage.isUserInteractionEnabled = true
-
-            }
+        didSet {
+            cellPresenter.load()
+            
+            self.layer.cornerRadius = 12
+            image.layer.cornerRadius = 12
+            self.contentView.isUserInteractionEnabled = true
+            //TODO: BUrayı aktif et
+            //                let tapGesture = UITapGestureRecognizer(target: self, action: #selector(handleTap(_:)))
+            //                playImage.addGestureRecognizer(tapGesture)
+            //                playImage.isUserInteractionEnabled = true
+            
         }
+    }
     
-//    @objc func handleTap(_ gesture: UITapGestureRecognizer) {
-//        cellPresenter.playMusic()
-//    }
-
+    //    @objc func handleTap(_ gesture: UITapGestureRecognizer) {
+    //        cellPresenter.playMusic()
+    //    }
+    
     @IBAction func onPlayButtonTapped(_ sender: UIButton) {
+//        if let indexPath = indexPath {
+//            delegate?.playButtonTapped(at: indexPath)
+//        }
         cellPresenter.playMusic()
     }
     
@@ -56,39 +66,42 @@ class SongViewCell: UICollectionViewCell {
 
 extension SongViewCell: SongViewCellProtocol{
     func startPlayAnimation(startAngle: Double, endAngle: Double, progress: Double) {
+        let progressLayer = CAShapeLayer()
+        progressLayer.strokeColor = UIColor.systemBlue.cgColor
+        progressLayer.lineWidth = 3.0
+        progressLayer.fillColor = UIColor.clear.cgColor
+        progressLayer.position = playImage.center
         
-//        progressLayer = CAShapeLayer()
-//        progressLayer.strokeColor = UIColor.systemBlue.cgColor
-//        progressLayer.lineWidth = 3.0
-//        progressLayer.fillColor = UIColor.clear.cgColor
-//        progressLayer.position = playImage.center
-//        layer.addSublayer(progressLayer)
-//        let center = playImage.center
-//        let radius = playImage.frame.width / 2.0
-//        circularPath = UIBezierPath(arcCenter: center, radius: radius, startAngle: -CGFloat.pi / 2, endAngle: 2 * CGFloat.pi, clockwise: true)
-//        progressLayer.path = circularPath.cgPath
-//
-//        let animation = CABasicAnimation(keyPath: "strokeEnd")
-//        animation.toValue = progress // Adjust the value to control the progress
-//        animation.duration = 0.1 // Adjust the duration as needed
-//        animation.fillMode = .removed
-//        animation.isRemovedOnCompletion = true
-//        progressLayer.add(animation, forKey: "progressAnimation")
+        let radius = min(playImage.bounds.width, playImage.bounds.height) / 2.0
+        let circularPath = UIBezierPath(arcCenter: CGPoint(x: 0, y: 0), radius: radius, startAngle: CGFloat(startAngle), endAngle: CGFloat(endAngle), clockwise: true)
+        progressLayer.path = circularPath.cgPath
+        
+        layer.addSublayer(progressLayer)
+        
+        let animation = CABasicAnimation(keyPath: "strokeEnd")
+        animation.toValue = progress // Adjust the value to control the progress
+        animation.duration = 0.01 // Adjust the duration as needed
+        animation.fillMode = .removed
+        animation.isRemovedOnCompletion = false
+        
+        progressLayer.add(animation, forKey: "progressAnimation")
     }
     
     func stopPlayAnimation() {
-//        let center = playImage.center
-//        let radius = playImage.frame.width / 2.0
-//        let startAngle = CGFloat(-Double.pi / 2)
-//        let endAngle = (2 * CGFloat(Double.pi))
-//        circularPath.removeAllPoints()
-//        progressLayer.removeFromSuperlayer()
+        layer.sublayers?.forEach { layer in
+                if layer is CAShapeLayer {
+                    layer.removeFromSuperlayer()
+                }
+            }
     }
     
-    func setImage(_ image: UIImage) {
-        DispatchQueue.main.async {
-            self.image.image = image
+    func setImage(_ url: String?) {
+        if let url = URL(string: url ?? ""){
+            DispatchQueue.main.async {
+                self.image.sd_setImage(with: url)
+            }
         }
+        
     }
     
     func setPlayImage(_ isPlaying: Bool) {

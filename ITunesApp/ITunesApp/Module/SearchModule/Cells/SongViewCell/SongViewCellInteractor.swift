@@ -15,6 +15,7 @@ protocol SongViewCellInteractorProtocol: AnyObject{
 
 protocol SongViewCellInteractorOutputProtocol: AnyObject{
     func handleUpdateProgress(startAngle: Double, endAngle: Double, progress: Double)
+    func handleMusicDidEnd()
 }
 
 fileprivate let musicPlayer: MusicPlayerProtocol = MusicPlayer.shared
@@ -48,9 +49,16 @@ extension SongViewCellInteractor: SongViewCellInteractorProtocol{
     }
     
     func playMusic(url: String) {
+        NotificationCenter.default.addObserver(self, selector: #selector(musicDidEnd), name: NSNotification.Name.AVPlayerItemDidPlayToEndTime, object: nil)
+
         musicPlayer.play(url: url)
         timer = Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: #selector(updateProgressView), userInfo: nil, repeats: true)
     }
+    
+    @objc func musicDidEnd() {
+        output?.handleMusicDidEnd()
+    }
+
     
     
 

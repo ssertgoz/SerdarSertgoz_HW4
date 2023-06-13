@@ -6,11 +6,11 @@
 //
 import UIKit
 import ITunesAPI
-import ImageDownloader
 
 protocol SongViewCellPresenterProtocol: AnyObject {
     func load()
     func playMusic()
+    var getIsPlaying: Bool { get }
 }
 
 final class SongViewCellPresenter {
@@ -33,6 +33,10 @@ final class SongViewCellPresenter {
 }
 
 extension SongViewCellPresenter: SongViewCellPresenterProtocol {
+    var getIsPlaying: Bool {
+        self.isPlaying
+    }
+    
     func playMusic() {
         if isPlaying{
             interactor?.pauseMusic()
@@ -49,22 +53,11 @@ extension SongViewCellPresenter: SongViewCellPresenterProtocol {
     
     
     func load() {
-        ImageDownloader.shared.image(
-            url: song.getArtworkURL,completion:
-                { [weak self] data, error in
-                    
-                    guard let self else { return }
-                    
-                    if let data {
-                        guard let img = UIImage(data: data) else { return }
-                        self.view?.setImage(img)
-                    }
-                })
         
+        view?.setImage(song.getArtworkURL)
         view?.setArtistName(song.getArtist ?? "")
         view?.setTrackName(song.getTrack ?? "")
         view?.setCollectionName(song.getCollection ?? "")
-        view?.setPlayImage(false)
         
     }
     
@@ -75,5 +68,11 @@ extension SongViewCellPresenter: SongViewCellInteractorOutputProtocol{
         view?.startPlayAnimation(startAngle: startAngle, endAngle: endAngle, progress: progress)
     }
     
+    func handleMusicDidEnd(){
+        interactor?.pauseMusic()
+        view?.setPlayImage(false)
+        view?.stopPlayAnimation()
+        isPlaying = false
+    }
     
 }
