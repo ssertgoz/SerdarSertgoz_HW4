@@ -17,6 +17,7 @@ protocol SearchPresenterProtocol: AnyObject{
     func songAt(_ index: Int) -> Song?
     func calculateCellHeight(collectionViewWidth: Double) -> (width: Double, height: Double)
     func didSelectRowAt(index: Int)
+    func favoritesButtonTapped()
 }
 
 extension SearchPresenter {
@@ -46,6 +47,10 @@ final class SearchPresenter{
 
 
 extension SearchPresenter: SearchPresenterProtocol{
+    func favoritesButtonTapped() {
+        router?.navigateTo(.favoritesScreen)
+    }
+    
     var playingMusicIndex: Int {
         get {
             self.playingIndex ?? -1
@@ -95,7 +100,7 @@ extension SearchPresenter: SearchPresenterProtocol{
     func didSelectRowAt(index: Int) {
         guard let source = songAt(index) else { return }
         
-        router?.navigateToDetail(.detailScreen(source: source))
+        router?.navigateTo(.detailScreen(source: source))
     }
     
     

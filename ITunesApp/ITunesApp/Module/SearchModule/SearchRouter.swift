@@ -11,10 +11,11 @@ import ITunesAPI
 
 enum SearchRoutes {
     case detailScreen(source: Song) //TODO: change
+    case favoritesScreen
 }
 
 protocol SearchRouterProtocol{
-    func navigateToDetail(_ route: SearchRoutes)
+    func navigateTo(_ route: SearchRoutes)
 }
 
 final class SearchRouter{
@@ -35,13 +36,15 @@ final class SearchRouter{
 }
 
 extension SearchRouter: SearchRouterProtocol{
-    func navigateToDetail(_ route: SearchRoutes) {
+    func navigateTo(_ route: SearchRoutes) {
         switch route {
         case .detailScreen(let source):
-            print("test4")
             let detailVC = DetailRouter.createModule()
             detailVC.source = source
             searchVC?.navigationController?.pushViewController(detailVC, animated: true)
+        case .favoritesScreen:
+            let favoritesVC = FavoritesRouter.createModule()
+            searchVC?.navigationController?.pushViewController(favoritesVC, animated: true)
         }
     }
     

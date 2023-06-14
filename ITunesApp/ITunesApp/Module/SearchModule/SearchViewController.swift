@@ -26,9 +26,15 @@ class SearchViewController: BaseViewController{
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        let heartButton = UIBarButtonItem(image: UIImage(systemName: "heart.fill"), style: .plain, target: self, action: #selector(heartButtonTapped))
+        heartButton.tintColor = UIColor.black
+            // Oluşturulan butonu navigationBar'ın sağ tarafına ekle
+            navigationItem.rightBarButtonItem = heartButton
         presenter.viewDidLoad()
     }
-    
+    @objc private func heartButtonTapped() {
+        presenter.favoritesButtonTapped()
+    }
     
 }
 

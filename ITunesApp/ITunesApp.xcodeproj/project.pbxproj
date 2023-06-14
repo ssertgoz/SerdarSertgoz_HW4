@@ -15,7 +15,6 @@
 		7552F0462A3798C2001D1EAD /* UIView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7552F0452A3798C2001D1EAD /* UIView+Extension.swift */; };
 		7552F0482A379FF0001D1EAD /* UIImageView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7552F0472A379FF0001D1EAD /* UIImageView+Extension.swift */; };
 		7552F04C2A392C5E001D1EAD /* FavoritesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7552F04A2A392C5E001D1EAD /* FavoritesViewController.swift */; };
-		7552F04D2A392C5E001D1EAD /* FavoritesViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7552F04B2A392C5E001D1EAD /* FavoritesViewController.xib */; };
 		7552F04F2A392C7E001D1EAD /* FavoritesPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7552F04E2A392C7E001D1EAD /* FavoritesPresenter.swift */; };
 		7552F0512A392C8B001D1EAD /* FavoritesInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7552F0502A392C8B001D1EAD /* FavoritesInteractor.swift */; };
 		7552F0532A392CA4001D1EAD /* FavoritesRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7552F0522A392CA4001D1EAD /* FavoritesRouter.swift */; };
@@ -53,6 +52,11 @@
 		75BC137F2A327F26002F411C /* SplashRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75BC137E2A327F26002F411C /* SplashRouter.swift */; };
 		75BC13812A327F34002F411C /* SplashInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75BC13802A327F34002F411C /* SplashInteractor.swift */; };
 		75ED21282A34C88D000CFC6A /* DetailViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 75ED21272A34C88D000CFC6A /* DetailViewController.storyboard */; };
+		75EF315F2A39346100DB9516 /* FavoritesViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 75EF315E2A39346100DB9516 /* FavoritesViewController.storyboard */; };
+		75EF31612A393B9700DB9516 /* FavoritesCollectionViewCellPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75EF31602A393B9700DB9516 /* FavoritesCollectionViewCellPresenter.swift */; };
+		75EF31632A393BAC00DB9516 /* FavoritesCollectionViewCellInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75EF31622A393BAC00DB9516 /* FavoritesCollectionViewCellInteractor.swift */; };
+		75EF31682A39B19700DB9516 /* FavoritesRepostory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75EF31672A39B19700DB9516 /* FavoritesRepostory.swift */; };
+		75EF316A2A39B4C300DB9516 /* FavoritesEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75EF31692A39B4C300DB9516 /* FavoritesEntity.swift */; };
 		75F07EB42A33A406005848C0 /* SearchViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 75F07EB32A33A406005848C0 /* SearchViewController.storyboard */; };
 		75F07EB62A33BBF9005848C0 /* SongViewCellPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75F07EB52A33BBF9005848C0 /* SongViewCellPresenter.swift */; };
 /* End PBXBuildFile section */
@@ -82,7 +86,6 @@
 		7552F0452A3798C2001D1EAD /* UIView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extension.swift"; sourceTree = "<group>"; };
 		7552F0472A379FF0001D1EAD /* UIImageView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView+Extension.swift"; sourceTree = "<group>"; };
 		7552F04A2A392C5E001D1EAD /* FavoritesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesViewController.swift; sourceTree = "<group>"; };
-		7552F04B2A392C5E001D1EAD /* FavoritesViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FavoritesViewController.xib; sourceTree = "<group>"; };
 		7552F04E2A392C7E001D1EAD /* FavoritesPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesPresenter.swift; sourceTree = "<group>"; };
 		7552F0502A392C8B001D1EAD /* FavoritesInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesInteractor.swift; sourceTree = "<group>"; };
 		7552F0522A392CA4001D1EAD /* FavoritesRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesRouter.swift; sourceTree = "<group>"; };
@@ -123,6 +126,11 @@
 		75BC137E2A327F26002F411C /* SplashRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashRouter.swift; sourceTree = "<group>"; };
 		75BC13802A327F34002F411C /* SplashInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashInteractor.swift; sourceTree = "<group>"; };
 		75ED21272A34C88D000CFC6A /* DetailViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = DetailViewController.storyboard; sourceTree = "<group>"; };
+		75EF315E2A39346100DB9516 /* FavoritesViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = FavoritesViewController.storyboard; sourceTree = "<group>"; };
+		75EF31602A393B9700DB9516 /* FavoritesCollectionViewCellPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesCollectionViewCellPresenter.swift; sourceTree = "<group>"; };
+		75EF31622A393BAC00DB9516 /* FavoritesCollectionViewCellInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesCollectionViewCellInteractor.swift; sourceTree = "<group>"; };
+		75EF31672A39B19700DB9516 /* FavoritesRepostory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesRepostory.swift; sourceTree = "<group>"; };
+		75EF31692A39B4C300DB9516 /* FavoritesEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesEntity.swift; sourceTree = "<group>"; };
 		75F07EB22A328319005848C0 /* ITunesAPI */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = ITunesAPI; path = ../ITunesAPI; sourceTree = "<group>"; };
 		75F07EB32A33A406005848C0 /* SearchViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = SearchViewController.storyboard; sourceTree = "<group>"; };
 		75F07EB52A33BBF9005848C0 /* SongViewCellPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SongViewCellPresenter.swift; sourceTree = "<group>"; };
@@ -160,11 +168,12 @@
 			isa = PBXGroup;
 			children = (
 				7552F0542A392CDF001D1EAD /* Cells */,
+				75EF315E2A39346100DB9516 /* FavoritesViewController.storyboard */,
 				7552F04A2A392C5E001D1EAD /* FavoritesViewController.swift */,
-				7552F04B2A392C5E001D1EAD /* FavoritesViewController.xib */,
 				7552F04E2A392C7E001D1EAD /* FavoritesPresenter.swift */,
 				7552F0502A392C8B001D1EAD /* FavoritesInteractor.swift */,
 				7552F0522A392CA4001D1EAD /* FavoritesRouter.swift */,
+				75EF31692A39B4C300DB9516 /* FavoritesEntity.swift */,
 			);
 			path = FavoritesModule;
 			sourceTree = "<group>";
@@ -174,6 +183,8 @@
 			children = (
 				7552F0552A392D01001D1EAD /* FavoritesCollectionViewCell.swift */,
 				7552F0562A392D01001D1EAD /* FavoritesCollectionViewCell.xib */,
+				75EF31602A393B9700DB9516 /* FavoritesCollectionViewCellPresenter.swift */,
+				75EF31622A393BAC00DB9516 /* FavoritesCollectionViewCellInteractor.swift */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -309,6 +320,7 @@
 		75BC13682A326378002F411C /* Module */ = {
 			isa = PBXGroup;
 			children = (
+				75EF31662A39B16F00DB9516 /* Repostories */,
 				7552F0492A392C37001D1EAD /* FavoritesModule */,
 				75BC136D2A326BE2002F411C /* SplashModule */,
 				75BC133F2A323511002F411C /* SearchModule */,
@@ -378,6 +390,14 @@
 				753951D22A3450A300072E18 /* SongViewCellInteractor.swift */,
 			);
 			path = SongViewCell;
+			sourceTree = "<group>";
+		};
+		75EF31662A39B16F00DB9516 /* Repostories */ = {
+			isa = PBXGroup;
+			children = (
+				75EF31672A39B19700DB9516 /* FavoritesRepostory.swift */,
+			);
+			path = Repostories;
 			sourceTree = "<group>";
 		};
 		75F07EB12A328319005848C0 /* Packages */ = {
@@ -503,12 +523,12 @@
 			files = (
 				75ED21282A34C88D000CFC6A /* DetailViewController.storyboard in Resources */,
 				757478F02A311F6A002E0E06 /* LaunchScreen.storyboard in Resources */,
+				75EF315F2A39346100DB9516 /* FavoritesViewController.storyboard in Resources */,
 				757478ED2A311F6A002E0E06 /* Assets.xcassets in Resources */,
 				757478E82A311F69002E0E06 /* Main.storyboard in Resources */,
 				75BC137B2A327DA9002F411C /* SplashViewController.xib in Resources */,
 				7552F0582A392D01001D1EAD /* FavoritesCollectionViewCell.xib in Resources */,
 				75BC13762A327D29002F411C /* SongViewCell.xib in Resources */,
-				7552F04D2A392C5E001D1EAD /* FavoritesViewController.xib in Resources */,
 				75F07EB42A33A406005848C0 /* SearchViewController.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -549,7 +569,9 @@
 				75BC135C2A324DF1002F411C /* LoadingView.swift in Sources */,
 				75BC137D2A327E67002F411C /* SplashPresenter.swift in Sources */,
 				7552F0462A3798C2001D1EAD /* UIView+Extension.swift in Sources */,
+				75EF31632A393BAC00DB9516 /* FavoritesCollectionViewCellInteractor.swift in Sources */,
 				75BC137F2A327F26002F411C /* SplashRouter.swift in Sources */,
+				75EF31682A39B19700DB9516 /* FavoritesRepostory.swift in Sources */,
 				7552F0442A3793C4001D1EAD /* UIImage+Extension.swift in Sources */,
 				7552F0512A392C8B001D1EAD /* FavoritesInteractor.swift in Sources */,
 				75BC134E2A323663002F411C /* DetailPresenter.swift in Sources */,
@@ -558,9 +580,11 @@
 				75BC13482A3235F4002F411C /* SearchRouter.swift in Sources */,
 				7552F04F2A392C7E001D1EAD /* FavoritesPresenter.swift in Sources */,
 				7552F0572A392D01001D1EAD /* FavoritesCollectionViewCell.swift in Sources */,
+				75EF316A2A39B4C300DB9516 /* FavoritesEntity.swift in Sources */,
 				757478E32A311F69002E0E06 /* SceneDelegate.swift in Sources */,
 				757478EB2A311F69002E0E06 /* ITunesApp.xcdatamodeld in Sources */,
 				75BC13552A324D3B002F411C /* UICollectionView+Extansion.swift in Sources */,
+				75EF31612A393B9700DB9516 /* FavoritesCollectionViewCellPresenter.swift in Sources */,
 				7552F04C2A392C5E001D1EAD /* FavoritesViewController.swift in Sources */,
 				75BC135E2A324E1B002F411C /* LoadingShowable.swift in Sources */,
 				75BC13572A324D5F002F411C /* UICollectionViewCell+Extansion.swift in Sources */,

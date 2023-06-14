@@ -41,7 +41,7 @@ class SongViewCell: UICollectionViewCell {
             
             self.layer.cornerRadius = 12
             image.layer.cornerRadius = 12
-            self.contentView.isUserInteractionEnabled = true
+            self.contentView.isUserInteractionEnabled = true //TODO: kaldır
             //TODO: BUrayı aktif et
             //                let tapGesture = UITapGestureRecognizer(target: self, action: #selector(handleTap(_:)))
             //                playImage.addGestureRecognizer(tapGesture)
