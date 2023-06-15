@@ -15,14 +15,13 @@ protocol DetailViewControllerProtocol: AnyObject{
     func updateTrackPriceLabel(text: String)
     func updateGenreNameLabel(text: String)
     func updateArtistNameLabel(text: String)
-    func updateProgressBarView()
-    func updateLikeImageButton(isFavorite: Bool)
+    func updateProgressBarView(defaultTime: String)
+    func updateLikeImageButton(isFavorite: Bool, normal: String, filled: String)
     func updateCollectionNameLabel(text: String)
     func updatePlayImageButton(image: UIImage)
-    func setPlayImage(_ isPlaying: Bool)
-    func updateProgress(progress: Double)
+    func setPlayImage(_ isPlaying: Bool, _ stopImageName: String, _ playImageName: String)
     func startPlayAnimation(elapsedTime: String,totalTime: String, progress: Double)
-    func stopPlayAnimation()
+    func stopPlayAnimation(_ stopImageName: String, _ playImageName: String)
     func getSource() -> SongEntity?
 }
 
@@ -48,10 +47,7 @@ class DetailViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         presenter.viewDidLoad()
-        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(imageViewTapped))
-        playImageButton.addGestureRecognizer(tapGesture)
-        let likeImageTapGesture = UITapGestureRecognizer(target: self, action: #selector(likeImageButtonTapped))
-        likeImageButton.addGestureRecognizer(likeImageTapGesture)
+        
     }
     
     @objc private func imageViewTapped() {
@@ -65,17 +61,14 @@ class DetailViewController: BaseViewController {
 
 
 extension DetailViewController: DetailViewControllerProtocol{
-    func updateProgress(progress: Double) {
-        //progressBar.setProgress(CGFloat(progress))
-    }
     
-    func setPlayImage(_ isPlaying: Bool) {
+    func setPlayImage(_ isPlaying: Bool, _ stopImageName: String, _ playImageName: String) {
         DispatchQueue.main.async {
             if isPlaying {
-                self.playImageButton.image = UIImage(systemName: "stop.fill")
+                self.playImageButton.image = UIImage(systemName: stopImageName)
             }
             else {
-                self.playImageButton.image = UIImage(systemName: "play.fill")
+                self.playImageButton.image = UIImage(systemName: playImageName)
             }
         }
     }
@@ -86,9 +79,9 @@ extension DetailViewController: DetailViewControllerProtocol{
         progressBar.setTotalTime(totalTime)
     }
     
-    func stopPlayAnimation() {
-        updateProgress(progress: 0)
-        setPlayImage(false)
+    func stopPlayAnimation(_ stopImageName: String, _ playImageName: String) {
+        progressBar.setProgress(0)
+        setPlayImage(false, stopImageName, playImageName)
     }
     
     func getSource() -> SongEntity? {
@@ -130,20 +123,21 @@ extension DetailViewController: DetailViewControllerProtocol{
         artistNameLabel.text = text
     }
     
-    func updateProgressBarView() {
-        progressBar = ProgressBarView(frame: CGRect(x: 0, y: 0, width: view.frame.width - 40, height: 35))
-        progressBar.setTotalTime("00:00")
-        progressBar.setElapsedTime("00:00")
+    func updateProgressBarView(defaultTime: String) {
+        let size = presenter.calculateProgressBarSize(width: view.frame.width)
+        progressBar = ProgressBarView(frame: CGRect(x: 0, y: 0, width: size.width, height: size.height))
+        progressBar.setTotalTime(defaultTime)
+        progressBar.setElapsedTime(defaultTime)
         progressBarView.addSubview(progressBar)
         
     }
     
-    func updateLikeImageButton(isFavorite: Bool) {
+    func updateLikeImageButton(isFavorite: Bool, normal: String, filled: String) {
         if isFavorite {
-            likeImageButton.image = UIImage(systemName: "heart.fill")
+            likeImageButton.image = UIImage(systemName: filled)
         }
         else{
-            likeImageButton.image = UIImage(systemName: "heart")
+            likeImageButton.image = UIImage(systemName: normal)
         }
     }
     
@@ -157,92 +151,10 @@ extension DetailViewController: DetailViewControllerProtocol{
     func setTitle(_ title: String) {
         self.title = title
         navigationController?.navigationBar.tintColor = UIColor.white
-    }
-    
-    
-    
-}
-
-class ProgressBarView: UIView {
-    private var progressLayer: CALayer!
-    private var progress: CGFloat = 0.0
-    private var backgroundLayer: CALayer!
-    private var elapsedTimeLabel: UILabel!
-    private var totalTimeLabel: UILabel!
-    
-    var elapsedTime: String? {
-        didSet {
-            setElapsedTime(elapsedTime)
-        }
-    }
-    
-    var totalTime: String? {
-        didSet {
-            setTotalTime(totalTime)
-        }
-    }
-    
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        setupProgressLayer()
-        setupLabels()
-    }
-    
-    required init?(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
-        setupProgressLayer()
-        setupLabels()
-    }
-    
-    private func setupProgressLayer() {
-        backgroundLayer = CALayer()
-        backgroundLayer.backgroundColor = UIColor.lightGray.cgColor
-        
-        
-        layer.addSublayer(backgroundLayer)
-        progressLayer = CALayer()
-        progressLayer.backgroundColor = UIColor.white.cgColor
-        layer.addSublayer(progressLayer)
-    }
-    
-    private func setupLabels() {
-        let labelHeight: CGFloat = 20
-        let labelSpacing: CGFloat = 8
-        
-        elapsedTimeLabel = UILabel(frame: CGRect(x: 0, y: bounds.height - labelHeight, width: bounds.width / 2, height: labelHeight))
-        elapsedTimeLabel.textColor = UIColor.white
-        elapsedTimeLabel.textAlignment = .left
-        addSubview(elapsedTimeLabel)
-        
-        totalTimeLabel = UILabel(frame: CGRect(x: bounds.width / 2, y: bounds.height - labelHeight, width: bounds.width / 2, height: labelHeight))
-        totalTimeLabel.textColor = UIColor.white
-        totalTimeLabel.textAlignment = .right
-        addSubview(totalTimeLabel)
-        
-        let progressViewHeight = bounds.height - labelHeight - labelSpacing
-        progressLayer.frame = CGRect(x: 0, y: 0, width: 0, height: progressViewHeight)
-    }
-    
-    func setProgress(_ progress: CGFloat) {
-        self.progress = max(0.0, min(progress, 1.0))
-        setNeedsLayout()
-    }
-    
-    override func layoutSubviews() {
-        super.layoutSubviews()
-        
-        let progressWidth = bounds.width * progress
-        let progressViewHeight = bounds.height - elapsedTimeLabel.frame.height - 10
-        backgroundLayer.frame = CGRect(x: 0, y: 0, width: bounds.width, height: bounds.height - elapsedTimeLabel.frame.height - 10)
-        progressLayer.frame = CGRect(x: 0, y: 0, width: progressWidth, height: progressViewHeight)
-    }
-    
-    func setElapsedTime(_ time: String?) {
-        elapsedTimeLabel.text = time
-    }
-    
-    func setTotalTime(_ time: String?) {
-        totalTimeLabel.text = time
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(imageViewTapped))
+        playImageButton.addGestureRecognizer(tapGesture)
+        let likeImageTapGesture = UITapGestureRecognizer(target: self, action: #selector(likeImageButtonTapped))
+        likeImageButton.addGestureRecognizer(likeImageTapGesture)
     }
 }
 

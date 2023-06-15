@@ -8,7 +8,7 @@
 import UIKit
 
 protocol FavoritesViewControllerProtocol: AnyObject{
-    func setTitle(title: String)
+    func setNavigationBar(title: String, backButtonText: String)
     func reloadData()
     func setupCollectionView()
 }
@@ -22,14 +22,7 @@ class FavoritesViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        collectionView.backgroundColor = UIColor.clear
-        let colors: [UIColor] = [.black, .black.withAlphaComponent(0), .black.withAlphaComponent(0)]
-        backgroundView.setGradientBackground(colors: colors)
-        let backButton = UIBarButtonItem()
-        backButton.title = "Back"
-        navigationItem.backBarButtonItem = backButton
-        // İstediğiniz arka plan rengini belirleyin
-
+        presenter.setNavigationBar()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -50,7 +43,6 @@ extension FavoritesViewController: UICollectionViewDataSource, UICollectionViewD
             let presenter = FavoritesCellPresenter(view: cell, interactor: interactor, song: song)
             cell.cellPresenter = presenter
             cell.delegate = self
-            interactor.output = presenter
         }
         return cell
     }
@@ -68,6 +60,7 @@ extension FavoritesViewController: FavoritesViewControllerProtocol{
     func setupCollectionView() {
         collectionView.dataSource = self
         collectionView.delegate = self
+        collectionView.backgroundColor = UIColor.clear
         collectionView.register(cellType: FavoritesCollectionViewCell.self)
     }
     func reloadData() {
@@ -79,18 +72,19 @@ extension FavoritesViewController: FavoritesViewControllerProtocol{
             } else {
                 self.emptyView.isHidden = true
             }
-
         }
     }
     
-    func setTitle(title: String) {
+    func setNavigationBar(title: String, backButtonText: String) {
         self.title = title
         navigationController?.navigationBar.tintColor = UIColor.white
-        
+        backgroundView.setGradientBackground()
+        let backButton = UIBarButtonItem()
+        backButton.title = backButtonText
+        navigationItem.backBarButtonItem = backButton
     }
-    
-    
 }
+
 extension FavoritesViewController: FavoritesCollectionViewCellDelegate{
     func onCollectionReloaded() {
         presenter.viewDidLoad()

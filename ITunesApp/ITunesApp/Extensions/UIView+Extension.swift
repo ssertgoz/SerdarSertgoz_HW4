@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 
 extension UIView {
-    func setGradientBackground(colors: [UIColor]) {
+    func setGradientBackground(colors: [UIColor] = [.black, .black.withAlphaComponent(0), .black.withAlphaComponent(0)]) {
         let gradientLayer = CAGradientLayer()
         gradientLayer.frame = bounds
         gradientLayer.colors = colors.map { $0.cgColor }

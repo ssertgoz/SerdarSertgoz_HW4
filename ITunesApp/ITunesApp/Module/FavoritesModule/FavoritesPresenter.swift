@@ -9,6 +9,7 @@ import Foundation
 
 protocol FavoritesPresenterProtocol: AnyObject{
     func viewDidLoad()
+    func setNavigationBar() 
     var numberOfItems: Int { get }
     func songAt(index: Int) -> SongEntity?
     func didSelectRowAt(index: Int)
@@ -16,12 +17,10 @@ protocol FavoritesPresenterProtocol: AnyObject{
 
 extension FavoritesPresenter {
     fileprivate enum Constants {
-        static let cellLeftPadding: Double = 10
-        static let cellRightPadding: Double = 10
-        static let cellPosterImageRatio: Double = 1/2
-        static let cellTitleHeight: Double = 60
+        static let cellCornerRadius: Double = 12
+        static let navigationTitle: String = "Favorites"
+        static let backButonText: String = "Back"
     }
-    
 }
 
 final class FavoritesPresenter{
@@ -41,7 +40,6 @@ final class FavoritesPresenter{
 extension FavoritesPresenter: FavoritesPresenterProtocol{
     func didSelectRowAt(index: Int) {
         guard let source = songAt(index: index) else { return }
-        
         router?.navigateTo(.detailScreen(source: source))
     }
     
@@ -53,11 +51,13 @@ extension FavoritesPresenter: FavoritesPresenterProtocol{
         return favorites?.count ?? 0
     }
     
+    func setNavigationBar() {
+        self.view?.setNavigationBar(title: Constants.navigationTitle, backButtonText: Constants.backButonText)
+    }
+    
     func viewDidLoad() {
-        self.view?.setTitle(title: "Favorites")
         self.view?.setupCollectionView()
         self.interactor?.fetchFavorites()
-        
     }
     
 }
@@ -66,14 +66,6 @@ extension FavoritesPresenter: FavoritesInteractorOutputProtocol{
     func handleFetchFavorites(favorites: [SongEntity]) {
         self.favorites = favorites.reversed()
         self.view?.reloadData()
-        
     }
-    
-    func handleIsFavorite(isFavorite: Bool) {
-        //
-    }
-    
-    
-    
     
 }

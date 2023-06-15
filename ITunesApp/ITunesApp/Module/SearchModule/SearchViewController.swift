@@ -10,10 +10,11 @@ import UIKit
 protocol SearchViewControllerProtocol: AnyObject {
     func showLoadingView()
     func hideLoadingView()
-    func reloadData()
     func showError(_ message: String)
+    func reloadData()
     func setTitle(_ title: String)
     func setupCollectionView()
+    func viewDidLoaded(backButtonTtile: String, favoritesImageName: String)
 }
 
 
@@ -21,26 +22,15 @@ class SearchViewController: BaseViewController{
     
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var collectionView: UICollectionView!
-    
     @IBOutlet weak var emptyView: UIView!
-    @IBOutlet var backgroundView: UIView!
+    @IBOutlet weak var backgroundView: UIView!
     var presenter: SearchPresenterProtocol!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        let heartButton = UIBarButtonItem(image: UIImage(systemName: "heart.fill"), style: .plain, target: self, action: #selector(heartButtonTapped))
-        heartButton.tintColor = UIColor.white
-            // Oluşturulan butonu navigationBar'ın sağ tarafına ekle
-            navigationItem.rightBarButtonItem = heartButton
-        collectionView.backgroundColor = UIColor.clear
-        let colors: [UIColor] = [.black, .black.withAlphaComponent(0), .black.withAlphaComponent(0)]
-        backgroundView.setGradientBackground(colors: colors)
-        let backButton = UIBarButtonItem()
-        backButton.title = "Back"
-        navigationItem.backBarButtonItem = backButton
-        navigationController?.navigationBar.barTintColor = .white.withAlphaComponent(0)
         presenter.viewDidLoad()
     }
+    
     @objc private func heartButtonTapped() {
         presenter.favoritesButtonTapped()
     }
@@ -58,10 +48,6 @@ extension SearchViewController: UICollectionViewDataSource, UICollectionViewDele
         if let song = presenter.songAt(indexPath.row){
             let presenter = SongViewCellPresenter(view: cell, interactor: interactor, song: song)
             cell.cellPresenter = presenter
-            cell.delegate = self
-            cell.indexPath = indexPath
-            cell.playingIndex = self.presenter.playingMusicIndex
-            cell.setPlayImage(self.presenter.playingMusicIndex == indexPath.row ? true : false)
             interactor.output = presenter
         }
         return cell
@@ -72,7 +58,8 @@ extension SearchViewController: UICollectionViewDataSource, UICollectionViewDele
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        CGSize(width: view.frame.width, height: 120)
+        let size = presenter.calculateCellHeight(collectionViewWidth: view.frame.width)
+        return CGSize(width: size.width, height: size.height)
     }
     
     
@@ -86,16 +73,29 @@ extension SearchViewController: UISearchBarDelegate{
 
 
 extension SearchViewController: SearchViewControllerProtocol {
+    func viewDidLoaded(backButtonTtile: String, favoritesImageName: String) {
+        let heartButton = UIBarButtonItem(image: UIImage(systemName: favoritesImageName), style: .plain, target: self, action: #selector(heartButtonTapped))
+        heartButton.tintColor = UIColor.white
+        navigationItem.rightBarButtonItem = heartButton
+        
+        backgroundView.setGradientBackground()
+        
+        let backButton = UIBarButtonItem()
+        backButton.title = backButtonTtile
+        navigationItem.backBarButtonItem = backButton
+    }
+    
     
     func setTitle(_ title: String) {
         self.title = title
         navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
-
+        
     }
     
     func setupCollectionView() {
         collectionView.dataSource = self
         collectionView.delegate = self
+        collectionView.backgroundColor = UIColor.clear
         collectionView.register(cellType: SongViewCell.self)
     }
     
@@ -111,21 +111,5 @@ extension SearchViewController: SearchViewControllerProtocol {
             }
         }
     }
-}
-
-extension SearchViewController: SongViewCellDelegate{
-    func playButtonTapped(at indexPath: IndexPath) {
-//        presenter.playingMusicIndex = indexPath.row
-//        reloadData()
-//        if(indexPath.row != presenter.playingMusicIndex){
-//            //presenter.playingMusicIndex = indexPath.row
-//            //reloadData()
-//        }
-        
-        print(indexPath.row)
-        
-    }
-    
-    
 }
 

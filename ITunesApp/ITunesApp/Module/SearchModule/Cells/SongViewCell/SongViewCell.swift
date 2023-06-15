@@ -8,17 +8,14 @@
 import UIKit
 
 protocol SongViewCellProtocol: AnyObject{
+    func setCornerRadius(radius: Double)
     func setArtistName(_ name: String)
     func setTrackName(_ name: String)
     func setCollectionName(_ name: String)
     func setImage(_ url: String?)
-    func setPlayImage(_ isPlaying: Bool)
-    func startPlayAnimation(startAngle: Double, endAngle: Double, progress: Double)
+    func setPlayImage(_ isPlaying: Bool, stopImage: String, playImage: String)
+    func startPlayAnimation(startAngle: Double, endAngle: Double, progress: Double, lineWiidth: Double, animationDuration: Double)
     func stopPlayAnimation()
-}
-
-protocol SongViewCellDelegate: AnyObject {
-    func playButtonTapped(at indexPath: IndexPath)
 }
 
 
@@ -30,42 +27,30 @@ class SongViewCell: UICollectionViewCell {
     @IBOutlet weak var image: UIImageView!
     @IBOutlet weak var playImage: UIImageView!
     @IBOutlet weak var cellView: UIView!
-    weak var delegate: SongViewCellDelegate?
-    var indexPath: IndexPath?
-    var playingIndex: Int?
     
     
     var cellPresenter: SongViewCellPresenterProtocol! {
         didSet {
             cellPresenter.load()
-            
-            cellView.layer.cornerRadius = 12
-            image.layer.cornerRadius = 12
-            self.contentView.isUserInteractionEnabled = true //TODO: kaldır
-            //TODO: BUrayı aktif et
-            let tapGesture = UITapGestureRecognizer(target: self, action: #selector(handleTap(_:)))
-            playImage.addGestureRecognizer(tapGesture)
-            
         }
     }
     
     @IBAction func onPlayButtonClicked(_ sender: Any) {
         cellPresenter.playMusic()
     }
-    @objc func handleTap(_ gesture: UITapGestureRecognizer) {
-            print("geldi")
-            cellPresenter.playMusic()
-        }
 
-    
-    
 }
 
 extension SongViewCell: SongViewCellProtocol{
-    func startPlayAnimation(startAngle: Double, endAngle: Double, progress: Double) {
+    func setCornerRadius(radius: Double) {
+        cellView.layer.cornerRadius = radius
+        image.layer.cornerRadius = radius
+    }
+    
+    func startPlayAnimation(startAngle: Double, endAngle: Double, progress: Double, lineWiidth: Double, animationDuration: Double) {
         let progressLayer = CAShapeLayer()
         progressLayer.strokeColor = UIColor.white.cgColor
-        progressLayer.lineWidth = 3.0
+        progressLayer.lineWidth = lineWiidth
         progressLayer.fillColor = UIColor.clear.cgColor
         progressLayer.position = playImage.center
         
@@ -76,8 +61,8 @@ extension SongViewCell: SongViewCellProtocol{
         layer.addSublayer(progressLayer)
         
         let animation = CABasicAnimation(keyPath: "strokeEnd")
-        animation.toValue = progress // Adjust the value to control the progress
-        animation.duration = 0.01 // Adjust the duration as needed
+        animation.toValue = progress
+        animation.duration = animationDuration
         animation.fillMode = .removed
         animation.isRemovedOnCompletion = false
         
@@ -101,13 +86,13 @@ extension SongViewCell: SongViewCellProtocol{
         
     }
     
-    func setPlayImage(_ isPlaying: Bool) {
+    func setPlayImage(_ isPlaying: Bool, stopImage: String, playImage: String) {
         DispatchQueue.main.async {
             if isPlaying {
-                self.playImage.image = UIImage(systemName: "stop.circle")
+                self.playImage.image = UIImage(systemName: stopImage)
             }
             else {
-                self.playImage.image = UIImage(systemName: "play.circle")
+                self.playImage.image = UIImage(systemName: playImage)
             }
         }
         

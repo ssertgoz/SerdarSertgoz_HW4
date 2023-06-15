@@ -9,7 +9,7 @@ import Foundation
 import UIKit
 
 enum SearchRoutes {
-    case detailScreen(source: SongEntity) //TODO: change
+    case detailScreen(source: SongEntity)
     case favoritesScreen
 }
 
@@ -29,7 +29,6 @@ final class SearchRouter{
         view?.presenter = preseneter
         interactor.output =  preseneter
         router.searchVC = view
-        
         return view!
     }
 }
@@ -46,5 +45,4 @@ extension SearchRouter: SearchRouterProtocol{
             searchVC?.navigationController?.pushViewController(favoritesVC, animated: true)
         }
     }
-    
 }

@@ -12,7 +12,8 @@ protocol FavoriteCollectionViewCellProtocol: AnyObject{
     func setTrackName(_ name: String)
     func setCollectionName(_ name: String)
     func setImage(_ url: String?)
-    func setLikeImage(_ isFavorite: Bool)
+    func setLikeImage(_ isFavorite: Bool, normal: String, filled: String)
+    func setCornerRadius(_ radius: Double)
     func reloadData()
 }
 
@@ -33,9 +34,6 @@ class FavoritesCollectionViewCell: UICollectionViewCell {
     var cellPresenter: FavoritesCellPresenterProtocol! {
         didSet {
             cellPresenter.viewDidLoad()
-            cellView.layer.cornerRadius = 12
-            imageView.layer.cornerRadius = 12
-            
         }
     }
 
@@ -45,30 +43,33 @@ class FavoritesCollectionViewCell: UICollectionViewCell {
 }
 
 extension FavoritesCollectionViewCell: FavoriteCollectionViewCellProtocol {
+    
+    func setCornerRadius(_ radius: Double) {
+        cellView.layer.cornerRadius = CGFloat(radius)
+        imageView.layer.cornerRadius = CGFloat(radius)
+    }
+    
     func reloadData() {
         delegate?.onCollectionReloaded()
     }
     
     func setImage(_ url: String?) {
-        
         if let url = URL(string: url ?? ""){
             DispatchQueue.main.async {
                 self.imageView.sd_setImage(with: url)
             }
         }
-        
     }
     
-    func setLikeImage(_ isFavorite: Bool) {
+    func setLikeImage(_ isFavorite: Bool, normal: String, filled: String) {
         DispatchQueue.main.async {
             if isFavorite {
-                self.likeButton.imageView?.image = UIImage(systemName: "heart.fill")
+                self.likeButton.imageView?.image = UIImage(systemName: filled)
             }
             else {
-                self.likeButton.imageView?.image = UIImage(systemName: "heart")
+                self.likeButton.imageView?.image = UIImage(systemName: normal)
             }
         }
-        
     }
     
     func setArtistName(_ name: String) {

@@ -16,14 +16,11 @@ protocol SearchInteractorOutputProtocol: AnyObject{
     func handleSearchResult(_ result: Result<SongsResultResponse, NetworkError>)
 }
 
-typealias SearchResult = Result<[SongsResultResponse], Error>
 fileprivate let service: ITunesServiceProtocol = API.shared
 
 final class SearchInteractor{
     weak var output: SearchInteractorOutputProtocol?
-    
 }
-
 
 extension SearchInteractor: SearchInteractorProtocol{
     

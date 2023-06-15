@@ -15,8 +15,6 @@ protocol SplashPresenterProtocol: AnyObject{
 
 final class SplashPresenter: SplashPresenterProtocol{
     
-    
-    
     unowned var view: SplashViewControllerProtocol!
     let router: SplashRouterProtocol!
     let interactor: SplashInteractorProtocol!
@@ -37,7 +35,7 @@ final class SplashPresenter: SplashPresenterProtocol{
 extension SplashPresenter: SplashInteractorOutputProtocol{
     func internetConnection(status: Bool) {
         if status{
-            DispatchQueue.main.asyncAfter(deadline: .now() + 1, execute: {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 2, execute: {
                 self.router.navigate(.searchScreen)
             })
         } else {

@@ -10,12 +10,10 @@ import Foundation
 protocol FavoritesInteractorProtocol: AnyObject{
     func fetchFavorites()
     func saveFavorite(_ favorite: SongEntity)
-    func isFavoriteExists(withTrackId trackId: Int)
 }
 
 protocol FavoritesInteractorOutputProtocol: AnyObject{
     func handleFetchFavorites(favorites: [SongEntity])
-    func handleIsFavorite(isFavorite: Bool)
 }
 
 fileprivate let favoritesDB: FavoritesRepositoryProtocol = FavoriteRepository.shared
@@ -34,12 +32,4 @@ extension FavoritesInteractor: FavoritesInteractorProtocol{
     func saveFavorite(_ favorite: SongEntity) {
         favoritesDB.saveFavorite(favorite)
     }
-    
-    func isFavoriteExists(withTrackId trackId: Int) {
-        self.output?.handleIsFavorite(isFavorite: favoritesDB.isFavorite(withTrackId: trackId))
-    }
-    
-
-    
-    
 }

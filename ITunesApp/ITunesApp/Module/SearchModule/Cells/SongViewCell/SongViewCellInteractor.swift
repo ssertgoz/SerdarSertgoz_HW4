@@ -37,11 +37,16 @@ final class SongViewCellInteractor{
         endAngle = startAngle + (2 * Double(Double.pi) * progress)
         output?.handleUpdateProgress(startAngle: startAngle, endAngle: endAngle, progress: progress)
     }
-
-}
     
+    @objc func musicDidEnd() {
+        output?.handleMusicDidEnd()
+    }
+    
+}
+
 
 extension SongViewCellInteractor: SongViewCellInteractorProtocol{
+    
     func pauseMusic() {
         musicPlayer.pause()
         timer?.invalidate()
@@ -50,18 +55,9 @@ extension SongViewCellInteractor: SongViewCellInteractorProtocol{
     
     func playMusic(url: String) {
         NotificationCenter.default.addObserver(self, selector: #selector(musicDidEnd), name: NSNotification.Name.AVPlayerItemDidPlayToEndTime, object: nil)
-
+        
         musicPlayer.play(url: url)
         timer = Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: #selector(updateProgressView), userInfo: nil, repeats: true)
     }
-    
-    @objc func musicDidEnd() {
-        output?.handleMusicDidEnd()
-    }
-
-    
-    
-
-    
     
 }

@@ -11,8 +11,6 @@ import ITunesAPI
 protocol SearchPresenterProtocol: AnyObject{
     func viewDidLoad()
     var numberOfItems: Int { get }
-    var cellPadding: Double { get }
-    var playingMusicIndex: Int { get set}
     func load(text: String)
     func songAt(_ index: Int) -> SongEntity?
     func calculateCellHeight(collectionViewWidth: Double) -> (width: Double, height: Double)
@@ -22,19 +20,19 @@ protocol SearchPresenterProtocol: AnyObject{
 
 extension SearchPresenter {
     fileprivate enum Constants {
-        static let cellLeftPadding: Double = 10
-        static let cellRightPadding: Double = 10
-        static let cellPosterImageRatio: Double = 1/2
-        static let cellTitleHeight: Double = 60
+        static let navigationTitle: String = "iTunes Search"
+        static let cellCornerRadius: Double = 12
+        static let favoriteImageName: String = "heart.fill"
+        static let backButtonTitle: String = "Back"
+        static let cellHeightFactor: Double = 3.5
+        static let delayTime: Double = 0.5
     }
-    
 }
 
 final class SearchPresenter{
     private var songs: [SongEntity] = []
     unowned var view: SearchViewControllerProtocol?
     let router: SearchRouterProtocol?
-    private var playingIndex: Int?
     private let interactor: SearchInteractorProtocol?
     private var timer: Timer?
     
@@ -47,64 +45,43 @@ final class SearchPresenter{
 
 
 extension SearchPresenter: SearchPresenterProtocol{
+    
+    func calculateCellHeight(collectionViewWidth: Double) -> (width: Double, height: Double) {
+        (collectionViewWidth, collectionViewWidth/Constants.cellHeightFactor)
+    }
+    
     func favoritesButtonTapped() {
         router?.navigateTo(.favoritesScreen)
     }
     
-    var playingMusicIndex: Int {
-        get {
-            self.playingIndex ?? -1
-        }
-        set {
-            self.playingIndex = newValue
-        }
-    }
-    
-    
-    
     func viewDidLoad() {
         view?.setupCollectionView()
-        view?.setTitle("iTunes Search")
+        view?.setTitle(Constants.navigationTitle)
+        view?.viewDidLoaded(backButtonTtile: Constants.backButtonTitle, favoritesImageName: Constants.favoriteImageName)
     }
     
     func load(text: String) {
         timer?.invalidate()
-        timer = Timer.scheduledTimer(withTimeInterval: 0.5, repeats: false) { [weak self] _ in
+        timer = Timer.scheduledTimer(withTimeInterval: Constants.delayTime, repeats: false) { [weak self] _ in
             guard let self else { return }
             self.view?.showLoadingView()
             let replacedStr = text.replacingOccurrences(of: " ", with: "+")
             self.interactor?.fetchSearchResults(text: replacedStr)
         }
-        
     }
     
     var numberOfItems: Int {
         songs.count
     }
     
-    var cellPadding: Double {
-        Constants.cellLeftPadding
-    }
-    
     func songAt(_ index: Int) -> SongEntity? {
         songs[index]
     }
     
-    func calculateCellHeight(collectionViewWidth: Double) -> (width: Double, height: Double) {
-        
-        let cellWitdh = collectionViewWidth - (Constants.cellLeftPadding + Constants.cellRightPadding)
-        let posterImageHeight = cellWitdh * Constants.cellPosterImageRatio
-        
-        return (width: cellWitdh, height: Constants.cellTitleHeight + posterImageHeight)
-    }
-    
     func didSelectRowAt(index: Int) {
         guard let source = songAt(index) else { return }
-        
         router?.navigateTo(.detailScreen(source: source))
     }
-    
-    
 }
 
 extension SearchPresenter: SearchInteractorOutputProtocol{

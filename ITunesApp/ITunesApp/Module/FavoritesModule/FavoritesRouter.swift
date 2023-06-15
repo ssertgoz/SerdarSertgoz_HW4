@@ -35,11 +35,11 @@ final class FavoritesRouter{
 extension FavoritesRouter: FavoritesRouterProtocol{
     func navigateTo(_ route: FavoritesRoutes) {
         switch route {
-                case .detailScreen(let source):
-                    let detailVC = DetailRouter.createModule()
-                    detailVC.source = source
-                    favoritesVC?.navigationController?.pushViewController(detailVC, animated: true)
-
+        case .detailScreen(let source):
+            let detailVC = DetailRouter.createModule()
+            detailVC.source = source
+            favoritesVC?.navigationController?.pushViewController(detailVC, animated: true)
+            
         }
     }
     

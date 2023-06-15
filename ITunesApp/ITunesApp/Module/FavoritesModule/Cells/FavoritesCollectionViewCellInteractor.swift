@@ -11,19 +11,10 @@ protocol FavoritesCellInteractorProtocol: AnyObject{
     func deleteFromFavorites(trackId: Int)
 }
 
-protocol FavoritesCellInteractorOutputProtocol: AnyObject{
-
-}
 fileprivate let favoritesRepository: FavoritesRepositoryProtocol = FavoriteRepository.shared
 
-final class FavoritesCellInteractor{
-    weak var output: FavoritesCellInteractorOutputProtocol?
-}
-    
-
-extension FavoritesCellInteractor: FavoritesCellInteractorProtocol{
+final class FavoritesCellInteractor: FavoritesCellInteractorProtocol{
     func deleteFromFavorites(trackId: Int) {
         favoritesRepository.deleteFavorite(trackId: trackId)
     }
-    
 }

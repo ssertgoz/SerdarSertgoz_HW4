@@ -47,7 +47,6 @@
 		75BC13752A327D29002F411C /* SongViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75BC13732A327D29002F411C /* SongViewCell.swift */; };
 		75BC13762A327D29002F411C /* SongViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 75BC13742A327D29002F411C /* SongViewCell.xib */; };
 		75BC137A2A327DA9002F411C /* SplashViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75BC13782A327DA9002F411C /* SplashViewController.swift */; };
-		75BC137B2A327DA9002F411C /* SplashViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 75BC13792A327DA9002F411C /* SplashViewController.xib */; };
 		75BC137D2A327E67002F411C /* SplashPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75BC137C2A327E67002F411C /* SplashPresenter.swift */; };
 		75BC137F2A327F26002F411C /* SplashRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75BC137E2A327F26002F411C /* SplashRouter.swift */; };
 		75BC13812A327F34002F411C /* SplashInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75BC13802A327F34002F411C /* SplashInteractor.swift */; };
@@ -60,6 +59,8 @@
 		75F07EB42A33A406005848C0 /* SearchViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 75F07EB32A33A406005848C0 /* SearchViewController.storyboard */; };
 		75F07EB62A33BBF9005848C0 /* SongViewCellPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75F07EB52A33BBF9005848C0 /* SongViewCellPresenter.swift */; };
 		75FC206B2A39DB61003F43F0 /* Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75FC206A2A39DB61003F43F0 /* Helper.swift */; };
+		75FC206D2A3AFF6E003F43F0 /* SplashViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 75FC206C2A3AFF6E003F43F0 /* SplashViewController.storyboard */; };
+		75FC206F2A3B2ADF003F43F0 /* ProgressBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75FC206E2A3B2ADF003F43F0 /* ProgressBarView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -122,7 +123,6 @@
 		75BC13732A327D29002F411C /* SongViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SongViewCell.swift; sourceTree = "<group>"; };
 		75BC13742A327D29002F411C /* SongViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SongViewCell.xib; sourceTree = "<group>"; };
 		75BC13782A327DA9002F411C /* SplashViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashViewController.swift; sourceTree = "<group>"; };
-		75BC13792A327DA9002F411C /* SplashViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SplashViewController.xib; sourceTree = "<group>"; };
 		75BC137C2A327E67002F411C /* SplashPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashPresenter.swift; sourceTree = "<group>"; };
 		75BC137E2A327F26002F411C /* SplashRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashRouter.swift; sourceTree = "<group>"; };
 		75BC13802A327F34002F411C /* SplashInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashInteractor.swift; sourceTree = "<group>"; };
@@ -136,6 +136,8 @@
 		75F07EB32A33A406005848C0 /* SearchViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = SearchViewController.storyboard; sourceTree = "<group>"; };
 		75F07EB52A33BBF9005848C0 /* SongViewCellPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SongViewCellPresenter.swift; sourceTree = "<group>"; };
 		75FC206A2A39DB61003F43F0 /* Helper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Helper.swift; sourceTree = "<group>"; };
+		75FC206C2A3AFF6E003F43F0 /* SplashViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = SplashViewController.storyboard; sourceTree = "<group>"; };
+		75FC206E2A3B2ADF003F43F0 /* ProgressBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressBarView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -258,7 +260,6 @@
 			isa = PBXGroup;
 			children = (
 				75BC13722A326DE8002F411C /* Entity */,
-				75BC13712A326DE2002F411C /* Views */,
 				75BC13702A326DB2002F411C /* Cells */,
 				757478E42A311F69002E0E06 /* SearchViewController.swift */,
 				75F07EB32A33A406005848C0 /* SearchViewController.storyboard */,
@@ -273,6 +274,7 @@
 		75BC13402A323541002F411C /* DetailModule */ = {
 			isa = PBXGroup;
 			children = (
+				75BC13712A326DE2002F411C /* Views */,
 				75ED21272A34C88D000CFC6A /* DetailViewController.storyboard */,
 				75BC13492A323640002F411C /* DetailViewController.swift */,
 				75BC134D2A323663002F411C /* DetailPresenter.swift */,
@@ -353,7 +355,7 @@
 		75BC136D2A326BE2002F411C /* SplashModule */ = {
 			isa = PBXGroup;
 			children = (
-				75BC13792A327DA9002F411C /* SplashViewController.xib */,
+				75FC206C2A3AFF6E003F43F0 /* SplashViewController.storyboard */,
 				75BC13782A327DA9002F411C /* SplashViewController.swift */,
 				75BC137C2A327E67002F411C /* SplashPresenter.swift */,
 				75BC13802A327F34002F411C /* SplashInteractor.swift */,
@@ -373,6 +375,7 @@
 		75BC13712A326DE2002F411C /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				75FC206E2A3B2ADF003F43F0 /* ProgressBarView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -528,8 +531,8 @@
 				757478F02A311F6A002E0E06 /* LaunchScreen.storyboard in Resources */,
 				75EF315F2A39346100DB9516 /* FavoritesViewController.storyboard in Resources */,
 				757478ED2A311F6A002E0E06 /* Assets.xcassets in Resources */,
+				75FC206D2A3AFF6E003F43F0 /* SplashViewController.storyboard in Resources */,
 				757478E82A311F69002E0E06 /* Main.storyboard in Resources */,
-				75BC137B2A327DA9002F411C /* SplashViewController.xib in Resources */,
 				7552F0582A392D01001D1EAD /* FavoritesCollectionViewCell.xib in Resources */,
 				75BC13762A327D29002F411C /* SongViewCell.xib in Resources */,
 				75F07EB42A33A406005848C0 /* SearchViewController.storyboard in Resources */,
@@ -594,6 +597,7 @@
 				75BC13572A324D5F002F411C /* UICollectionViewCell+Extansion.swift in Sources */,
 				75BC13462A3235DB002F411C /* SearchInteractor.swift in Sources */,
 				75BC136F2A326C57002F411C /* ClassName+Extension.swift in Sources */,
+				75FC206F2A3B2ADF003F43F0 /* ProgressBarView.swift in Sources */,
 				75BC137A2A327DA9002F411C /* SplashViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -768,7 +772,9 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				"ASSETCATALOG_COMPILER_APPICON_NAME[sdk=iphoneos*]" = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -795,7 +801,9 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				"ASSETCATALOG_COMPILER_APPICON_NAME[sdk=iphoneos*]" = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				GENERATE_INFOPLIST_FILE = YES;

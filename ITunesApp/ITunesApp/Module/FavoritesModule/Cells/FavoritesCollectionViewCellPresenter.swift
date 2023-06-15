@@ -14,10 +14,7 @@ protocol FavoritesCellPresenterProtocol: AnyObject{
 
 extension FavoritesCellPresenter {
     fileprivate enum Constants {
-        static let cellLeftPadding: Double = 10
-        static let cellRightPadding: Double = 10
-        static let cellPosterImageRatio: Double = 1/2
-        static let cellTitleHeight: Double = 60
+        static let cellCornerRadius: Double = 12
     }
     
 }
@@ -46,12 +43,7 @@ extension FavoritesCellPresenter: FavoritesCellPresenterProtocol{
         view?.setArtistName(song.artistName ?? "")
         view?.setTrackName(song.trackName ?? "")
         view?.setCollectionName(song.collectionName ?? "")
+        view?.setCornerRadius(Constants.cellCornerRadius)
     }
-    
-}
-
-extension FavoritesCellPresenter: FavoritesCellInteractorOutputProtocol{
-   
-    
     
 }

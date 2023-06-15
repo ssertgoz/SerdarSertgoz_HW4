@@ -42,7 +42,7 @@ final class DetailInteractor{
         output?.handleUpdateProgress(elapsedTime:musicPlayer.getCurrentTime() ?? "00.00", totalTime: musicPlayer.getTotalDuration() ?? "00.00",progress: progress)
     }
 }
-    
+
 
 extension DetailInteractor: DetailInteractorProtocol{
     func deleteFromFavorites(trackId: Int) {
@@ -77,6 +77,5 @@ extension DetailInteractor: DetailInteractorProtocol{
     @objc func musicDidEnd() {
         output?.handleMusicDidEnd()
     }
-    
     
 }

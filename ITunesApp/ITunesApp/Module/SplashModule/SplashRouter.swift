@@ -22,14 +22,15 @@ final class SplashRouter {
     weak var viewController: SplashViewController?
     
     static func createModule() -> SplashViewController {
-         let view = SplashViewController()
+        let storyBoard = UIStoryboard(name: "SplashViewController", bundle: nil)
+        let view = storyBoard.instantiateViewController(withIdentifier: "SplashViewController") as? SplashViewController
          let interactor = SplashInteractor()
          let router = SplashRouter()
          let presenter = SplashPresenter(view: view, router: router, interactor: interactor)
-         view.presenter = presenter
+        view?.presenter = presenter
          interactor.output = presenter
          router.viewController = view
-         return view
+        return view!
      }
 }
 
@@ -43,6 +44,7 @@ extension SplashRouter: SplashRouterProtocol {
             let searchVC = SearchRouter.createModule()
             let navigationController = UINavigationController(rootViewController: searchVC)
             window.rootViewController = navigationController
+            viewController?.navigationController?.pushViewController(searchVC, animated: true)
         }
     }
     
