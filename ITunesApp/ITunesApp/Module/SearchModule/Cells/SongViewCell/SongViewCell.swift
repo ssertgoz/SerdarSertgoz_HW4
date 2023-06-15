@@ -29,7 +29,7 @@ class SongViewCell: UICollectionViewCell {
     @IBOutlet weak var collectionNameLabel: UILabel!
     @IBOutlet weak var image: UIImageView!
     @IBOutlet weak var playImage: UIImageView!
-    @IBOutlet weak var playButon: UIButton!
+    @IBOutlet weak var cellView: UIView!
     weak var delegate: SongViewCellDelegate?
     var indexPath: IndexPath?
     var playingIndex: Int?
@@ -39,27 +39,24 @@ class SongViewCell: UICollectionViewCell {
         didSet {
             cellPresenter.load()
             
-            self.layer.cornerRadius = 12
+            cellView.layer.cornerRadius = 12
             image.layer.cornerRadius = 12
             self.contentView.isUserInteractionEnabled = true //TODO: kaldır
             //TODO: BUrayı aktif et
-            //                let tapGesture = UITapGestureRecognizer(target: self, action: #selector(handleTap(_:)))
-            //                playImage.addGestureRecognizer(tapGesture)
-            //                playImage.isUserInteractionEnabled = true
+            let tapGesture = UITapGestureRecognizer(target: self, action: #selector(handleTap(_:)))
+            playImage.addGestureRecognizer(tapGesture)
             
         }
     }
     
-    //    @objc func handleTap(_ gesture: UITapGestureRecognizer) {
-    //        cellPresenter.playMusic()
-    //    }
-    
-    @IBAction func onPlayButtonTapped(_ sender: UIButton) {
-//        if let indexPath = indexPath {
-//            delegate?.playButtonTapped(at: indexPath)
-//        }
+    @IBAction func onPlayButtonClicked(_ sender: Any) {
         cellPresenter.playMusic()
     }
+    @objc func handleTap(_ gesture: UITapGestureRecognizer) {
+            print("geldi")
+            cellPresenter.playMusic()
+        }
+
     
     
 }
@@ -67,13 +64,13 @@ class SongViewCell: UICollectionViewCell {
 extension SongViewCell: SongViewCellProtocol{
     func startPlayAnimation(startAngle: Double, endAngle: Double, progress: Double) {
         let progressLayer = CAShapeLayer()
-        progressLayer.strokeColor = UIColor.systemBlue.cgColor
+        progressLayer.strokeColor = UIColor.white.cgColor
         progressLayer.lineWidth = 3.0
         progressLayer.fillColor = UIColor.clear.cgColor
         progressLayer.position = playImage.center
         
         let radius = min(playImage.bounds.width, playImage.bounds.height) / 2.0
-        let circularPath = UIBezierPath(arcCenter: CGPoint(x: 0, y: 0), radius: radius, startAngle: CGFloat(startAngle), endAngle: CGFloat(endAngle), clockwise: true)
+        let circularPath = UIBezierPath(arcCenter: CGPoint(x: 12, y: 5), radius: radius, startAngle: CGFloat(startAngle), endAngle: CGFloat(endAngle), clockwise: true)
         progressLayer.path = circularPath.cgPath
         
         layer.addSublayer(progressLayer)
@@ -89,10 +86,10 @@ extension SongViewCell: SongViewCellProtocol{
     
     func stopPlayAnimation() {
         layer.sublayers?.forEach { layer in
-                if layer is CAShapeLayer {
-                    layer.removeFromSuperlayer()
-                }
+            if layer is CAShapeLayer {
+                layer.removeFromSuperlayer()
             }
+        }
     }
     
     func setImage(_ url: String?) {

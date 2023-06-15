@@ -12,21 +12,26 @@ import MusicPlayer
 protocol DetailInteractorProtocol: AnyObject{
     func playMusic(url: String)
     func pauseMusic()
+    func saveToFavorites(favorite: SongEntity)
+    func isFavorite(trackId: Int)
+    func checkForSaveOrDelete(trackId: Int)
+    func deleteFromFavorites(trackId: Int)
 }
 
 protocol DetailInteractorOutputProtocol: AnyObject{
     func handleUpdateProgress(elapsedTime: String,totalTime: String, progress: Double)
     func handleMusicDidEnd()
+    func handleIsFavorite(isFavorite: Bool)
+    func handleCheckForSaveOrDelete(isFavorite: Bool)
 }
 
 fileprivate let musicPlayer: MusicPlayerProtocol = MusicPlayer.shared
+fileprivate let favoritesRepository: FavoritesRepositoryProtocol = FavoriteRepository.shared
 
 final class DetailInteractor{
     weak var output: DetailInteractorOutputProtocol?
     
     private var timer: Timer?
-    private var startAngle: Double!
-    private var endAngle: Double!
     private var progress: Double!
     
     @objc func updateProgressView() {
@@ -40,6 +45,22 @@ final class DetailInteractor{
     
 
 extension DetailInteractor: DetailInteractorProtocol{
+    func deleteFromFavorites(trackId: Int) {
+        favoritesRepository.deleteFavorite(trackId: trackId)
+    }
+    
+    func checkForSaveOrDelete(trackId: Int) {
+        output?.handleCheckForSaveOrDelete(isFavorite: favoritesRepository.isFavorite(withTrackId: trackId))
+    }
+    
+    func isFavorite(trackId: Int) {
+        output?.handleIsFavorite(isFavorite: favoritesRepository.isFavorite(withTrackId: trackId))
+    }
+    
+    func saveToFavorites(favorite: SongEntity) {
+        favoritesRepository.saveFavorite(favorite)
+    }
+    
     func pauseMusic() {
         musicPlayer.pause()
         timer?.invalidate()

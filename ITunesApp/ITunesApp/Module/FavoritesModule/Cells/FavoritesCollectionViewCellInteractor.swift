@@ -8,12 +8,13 @@
 import Foundation
 
 protocol FavoritesCellInteractorProtocol: AnyObject{
+    func deleteFromFavorites(trackId: Int)
 }
 
 protocol FavoritesCellInteractorOutputProtocol: AnyObject{
 
 }
-
+fileprivate let favoritesRepository: FavoritesRepositoryProtocol = FavoriteRepository.shared
 
 final class FavoritesCellInteractor{
     weak var output: FavoritesCellInteractorOutputProtocol?
@@ -21,7 +22,8 @@ final class FavoritesCellInteractor{
     
 
 extension FavoritesCellInteractor: FavoritesCellInteractorProtocol{
-
-    
+    func deleteFromFavorites(trackId: Int) {
+        favoritesRepository.deleteFavorite(trackId: trackId)
+    }
     
 }

@@ -7,10 +7,9 @@
 
 import Foundation
 import UIKit
-import ITunesAPI
 
 enum SearchRoutes {
-    case detailScreen(source: Song) //TODO: change
+    case detailScreen(source: SongEntity) //TODO: change
     case favoritesScreen
 }
 

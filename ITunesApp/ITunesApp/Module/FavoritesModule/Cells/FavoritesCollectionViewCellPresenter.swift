@@ -6,10 +6,10 @@
 //
 
 import Foundation
-import ITunesAPI
 
 protocol FavoritesCellPresenterProtocol: AnyObject{
     func viewDidLoad()
+    func deleteFromFavorites()
 }
 
 extension FavoritesCellPresenter {
@@ -25,9 +25,9 @@ extension FavoritesCellPresenter {
 final class FavoritesCellPresenter{
     unowned var view: FavoriteCollectionViewCellProtocol?
     private let interactor: FavoritesCellInteractorProtocol?
-    private let song: Song!
+    private let song: SongEntity!
     
-    init(view: FavoriteCollectionViewCellProtocol? = nil,  interactor: FavoritesCellInteractorProtocol?, song: Song) {
+    init(view: FavoriteCollectionViewCellProtocol? = nil,  interactor: FavoritesCellInteractorProtocol?, song: SongEntity) {
         self.view = view
         self.interactor = interactor
         self.song = song
@@ -36,11 +36,16 @@ final class FavoritesCellPresenter{
 
 
 extension FavoritesCellPresenter: FavoritesCellPresenterProtocol{
+    func deleteFromFavorites() {
+        self.interactor?.deleteFromFavorites(trackId: song.trackId)
+        self.view?.reloadData()
+    }
+    
     func viewDidLoad() {
-        view?.setImage(song.getArtworkURL)
-        view?.setArtistName(song.getArtist ?? "")
-        view?.setTrackName(song.getTrack ?? "")
-        view?.setCollectionName(song.getCollection ?? "")
+        view?.setImage(song.artworkUrl100)
+        view?.setArtistName(song.artistName ?? "")
+        view?.setTrackName(song.trackName ?? "")
+        view?.setCollectionName(song.collectionName ?? "")
     }
     
 }

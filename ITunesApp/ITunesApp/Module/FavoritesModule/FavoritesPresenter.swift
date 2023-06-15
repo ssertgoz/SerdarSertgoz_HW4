@@ -6,12 +6,11 @@
 //
 
 import Foundation
-import ITunesAPI
 
 protocol FavoritesPresenterProtocol: AnyObject{
     func viewDidLoad()
     var numberOfItems: Int { get }
-    func songAt(_ index: Int) -> Song?
+    func songAt(index: Int) -> SongEntity?
     func didSelectRowAt(index: Int)
 }
 
@@ -29,7 +28,7 @@ final class FavoritesPresenter{
     unowned var view: FavoritesViewControllerProtocol?
     let router: FavoritesRouterProtocol?
     private let interactor: FavoritesInteractorProtocol?
-    private var favorites: [Song]?
+    private var favorites: [SongEntity]? = []
     
     init(view: FavoritesViewControllerProtocol? = nil, router: FavoritesRouterProtocol?, interactor: FavoritesInteractorProtocol?) {
         self.view = view
@@ -41,10 +40,12 @@ final class FavoritesPresenter{
 
 extension FavoritesPresenter: FavoritesPresenterProtocol{
     func didSelectRowAt(index: Int) {
-        //
+        guard let source = songAt(index: index) else { return }
+        
+        router?.navigateTo(.detailScreen(source: source))
     }
     
-    func songAt(_ index: Int) -> Song? {
+    func songAt(index: Int) -> SongEntity? {
         return favorites?[index]
     }
     
@@ -53,15 +54,26 @@ extension FavoritesPresenter: FavoritesPresenterProtocol{
     }
     
     func viewDidLoad() {
-        
-        
+        self.view?.setTitle(title: "Favorites")
+        self.view?.setupCollectionView()
+        self.interactor?.fetchFavorites()
         
     }
     
 }
 
 extension FavoritesPresenter: FavoritesInteractorOutputProtocol{
-   
+    func handleFetchFavorites(favorites: [SongEntity]) {
+        self.favorites = favorites.reversed()
+        self.view?.reloadData()
+        
+    }
+    
+    func handleIsFavorite(isFavorite: Bool) {
+        //
+    }
+    
+    
     
     
 }

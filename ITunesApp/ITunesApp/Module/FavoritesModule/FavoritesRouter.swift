@@ -9,15 +9,15 @@ import Foundation
 import UIKit
 
 enum FavoritesRoutes {
-    //case detailScreen(source: Int) //TODO: change
+    case detailScreen(source: SongEntity) 
 }
 
 protocol FavoritesRouterProtocol{
-    //func navigateToDetail(_ route: SearchRoutes)
+    func navigateTo(_ route: FavoritesRoutes)
 }
 
 final class FavoritesRouter{
-    //private weak var searchCV: SearchViewController?
+    private weak var favoritesVC: FavoritesViewController?
     
     static func createModule() -> FavoritesViewController {
         let storyBoard = UIStoryboard(name: "FavoritesViewController", bundle: nil)
@@ -27,19 +27,20 @@ final class FavoritesRouter{
         let preseneter = FavoritesPresenter(view: view, router: router, interactor: interactor)
         view?.presenter = preseneter
         interactor.output =  preseneter
+        router.favoritesVC = view
         return view!
     }
 }
 
 extension FavoritesRouter: FavoritesRouterProtocol{
-//    func navigateToDetail(_ route: SearchRoutes) {
-//        switch route {
-//                case .detailScreen(let source):
-//
-//                    let detailVC = DetailRouter.createModule()
-//                    detailVC.source = source
-//                    viewController?.navigationController?.pushViewController(detailVC, animated: true)
-//                }
-//    }
+    func navigateTo(_ route: FavoritesRoutes) {
+        switch route {
+                case .detailScreen(let source):
+                    let detailVC = DetailRouter.createModule()
+                    detailVC.source = source
+                    favoritesVC?.navigationController?.pushViewController(detailVC, animated: true)
+
+        }
+    }
     
 }

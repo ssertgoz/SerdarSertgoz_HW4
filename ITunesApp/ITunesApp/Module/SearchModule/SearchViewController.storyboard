@@ -4,7 +4,6 @@
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
-        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="collection view cell content view" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -20,10 +19,15 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qTO-sz-Tob">
                                 <rect key="frame" x="0.0" y="59" width="393" height="80"/>
                                 <subviews>
-                                    <searchBar contentMode="redraw" searchBarStyle="minimal" placeholder="Search" translatesAutoresizingMaskIntoConstraints="NO" id="l1n-qT-HmR">
+                                    <searchBar contentMode="redraw" barStyle="black" searchBarStyle="minimal" placeholder="Search" translatesAutoresizingMaskIntoConstraints="NO" id="l1n-qT-HmR">
                                         <rect key="frame" x="12" y="12" width="369" height="56"/>
+                                        <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <color key="barTintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <textInputTraits key="textInputTraits"/>
+                                        <scopeButtonTitles>
+                                            <string>Title</string>
+                                            <string>Title</string>
+                                        </scopeButtonTitles>
                                         <connections>
                                             <outlet property="delegate" destination="Y6W-OH-hqX" id="G9q-RF-tKh"/>
                                         </connections>
@@ -39,13 +43,28 @@
                             </view>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="dND-C1-0kF">
                                 <rect key="frame" x="0.0" y="147" width="393" height="705.66666666666663"/>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="Gca-9C-CFe">
+                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="Gca-9C-CFe">
                                     <size key="itemSize" width="128" height="128"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 </collectionViewFlowLayout>
+                                <view key="backgroundView" contentMode="scaleToFill" id="daW-4P-a2n">
+                                    <rect key="frame" x="0.0" y="0.0" width="393" height="705.66666666666663"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="There is no result" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="H5j-rI-3zl">
+                                            <rect key="frame" x="116" y="340.33333333333331" width="161" height="25.333333333333314"/>
+                                            <fontDescription key="fontDescription" type="system" weight="medium" pointSize="21"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="H5j-rI-3zl" firstAttribute="centerY" secondItem="daW-4P-a2n" secondAttribute="centerY" id="0SN-7O-cN1"/>
+                                        <constraint firstItem="H5j-rI-3zl" firstAttribute="centerX" secondItem="daW-4P-a2n" secondAttribute="centerX" id="fAE-jP-Qhf"/>
+                                    </constraints>
+                                </view>
                                 <cells>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="cqE-Gp-343">
                                         <rect key="frame" x="0.0" y="0.0" width="127.99999999999997" height="128"/>
@@ -54,12 +73,13 @@
                                             <rect key="frame" x="0.0" y="0.0" width="127.99999999999997" height="128"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                         </collectionViewCellContentView>
+                                        <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </collectionViewCell>
                                 </cells>
                             </collectionView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="qTO-sz-Tob" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" id="CQa-vI-rLB"/>
                             <constraint firstItem="qTO-sz-Tob" firstAttribute="trailing" secondItem="vDu-zF-Fre" secondAttribute="trailing" id="JBr-8n-qtU"/>
@@ -71,7 +91,9 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="backgroundView" destination="5EZ-qb-Rvc" id="E6M-0R-osv"/>
                         <outlet property="collectionView" destination="dND-C1-0kF" id="nth-Nq-UgZ"/>
+                        <outlet property="emptyView" destination="daW-4P-a2n" id="cfZ-5O-eeA"/>
                         <outlet property="searchBar" destination="l1n-qT-HmR" id="eKc-Xp-MlW"/>
                     </connections>
                 </viewController>
@@ -80,9 +102,4 @@
             <point key="canvasLocation" x="64.885496183206101" y="3.5211267605633805"/>
         </scene>
     </scenes>
-    <resources>
-        <systemColor name="systemBackgroundColor">
-            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
-    </resources>
 </document>

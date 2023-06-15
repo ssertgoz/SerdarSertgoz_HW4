@@ -6,7 +6,6 @@
 //
 
 import UIKit
-import ITunesAPI
 
 protocol DetailViewControllerProtocol: AnyObject{
     func setTitle(_ title: String)
@@ -17,14 +16,14 @@ protocol DetailViewControllerProtocol: AnyObject{
     func updateGenreNameLabel(text: String)
     func updateArtistNameLabel(text: String)
     func updateProgressBarView()
-    func updateLikeImageButton(image: UIImage)
+    func updateLikeImageButton(isFavorite: Bool)
     func updateCollectionNameLabel(text: String)
     func updatePlayImageButton(image: UIImage)
     func setPlayImage(_ isPlaying: Bool)
     func updateProgress(progress: Double)
     func startPlayAnimation(elapsedTime: String,totalTime: String, progress: Double)
     func stopPlayAnimation()
-    func getSource() -> Song?
+    func getSource() -> SongEntity?
 }
 
 class DetailViewController: BaseViewController {
@@ -44,17 +43,22 @@ class DetailViewController: BaseViewController {
     @IBOutlet weak var playImageButton: UIImageView!
     private var progressBar: ProgressBarView!
     var presenter: DetailPresenterProtocol!
-    var source: Song?
+    var source: SongEntity?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         presenter.viewDidLoad()
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(imageViewTapped))
         playImageButton.addGestureRecognizer(tapGesture)
+        let likeImageTapGesture = UITapGestureRecognizer(target: self, action: #selector(likeImageButtonTapped))
+        likeImageButton.addGestureRecognizer(likeImageTapGesture)
     }
     
     @objc private func imageViewTapped() {
         presenter.playMusic()
+    }
+    @objc private func likeImageButtonTapped() {
+        presenter.saveToFavorites()
     }
     
 }
@@ -87,7 +91,7 @@ extension DetailViewController: DetailViewControllerProtocol{
         setPlayImage(false)
     }
     
-    func getSource() -> Song? {
+    func getSource() -> SongEntity? {
         return self.source
     }
     
@@ -127,15 +131,20 @@ extension DetailViewController: DetailViewControllerProtocol{
     }
     
     func updateProgressBarView() {
-        progressBar = ProgressBarView(frame: CGRect(x: 0, y: 0, width: progressBarView.frame.width, height: 35))
+        progressBar = ProgressBarView(frame: CGRect(x: 0, y: 0, width: view.frame.width - 40, height: 35))
         progressBar.setTotalTime("00:00")
         progressBar.setElapsedTime("00:00")
         progressBarView.addSubview(progressBar)
         
     }
     
-    func updateLikeImageButton(image: UIImage) {
-        likeImageButton.image = image
+    func updateLikeImageButton(isFavorite: Bool) {
+        if isFavorite {
+            likeImageButton.image = UIImage(systemName: "heart.fill")
+        }
+        else{
+            likeImageButton.image = UIImage(systemName: "heart")
+        }
     }
     
     func updateCollectionNameLabel(text: String) {

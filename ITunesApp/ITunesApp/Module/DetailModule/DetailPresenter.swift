@@ -6,13 +6,12 @@
 //
 
 import Foundation
-import ITunesAPI
-//import ImageDownloader
 import SDWebImage
 
 protocol DetailPresenterProtocol: AnyObject{
     func viewDidLoad()
     func playMusic()
+    func saveToFavorites()
 }
 
 extension DetailPresenter {
@@ -40,6 +39,12 @@ final class DetailPresenter{
 
 
 extension DetailPresenter: DetailPresenterProtocol{
+    func saveToFavorites() {
+        guard let song = view?.getSource() else { return }
+        self.interactor?.checkForSaveOrDelete(trackId: song.trackId)
+        
+    }
+    
     
     func playMusic() {
         guard let song = view?.getSource() else { return }
@@ -49,7 +54,7 @@ extension DetailPresenter: DetailPresenterProtocol{
             view?.stopPlayAnimation()
             isPlaying = false
         }else{
-            interactor?.playMusic(url: song.getPreviewURL ?? "")
+            interactor?.playMusic(url: song.previewUrl ?? "")
             view?.setPlayImage(true)
             isPlaying = true
         }
@@ -57,23 +62,40 @@ extension DetailPresenter: DetailPresenterProtocol{
     }
     func viewDidLoad() {
         guard let song = view?.getSource() else { return }
-        var imgUrl = song.getArtworkURL
+        var imgUrl = song.artworkUrl100
         imgUrl?.getHighResloutionImageUrl()
         view?.updateTrackImage(url: imgUrl!)
-        view?.updateTrackNameLabel(text: song.getTrack ?? "")
-        view?.updateCollectionPriceLabel(text: String(song.getCollectionPrice ?? 0) + " " + (song.getCurrency ?? ""))
-        view?.updateTrackPriceLabel(text: String(song.getTrackPrice ?? 0) + " " + (song.getCurrency ?? ""))
-        view?.updateGenreNameLabel(text: song.getPrimaryGenre ?? "")
-        view?.updateArtistNameLabel(text: song.getArtist ?? "")
-        view?.updateCollectionNameLabel(text: song.getCollection ?? "")
+        view?.updateTrackNameLabel(text: song.trackName ?? "")
+        view?.updateCollectionPriceLabel(text: String(song.collectionPrice ?? 0) + " " + (song.currency ?? ""))
+        view?.updateTrackPriceLabel(text: String(song.trackPrice ?? 0) + " " + (song.currency ?? ""))
+        view?.updateGenreNameLabel(text: song.primaryGenreName ?? "")
+        view?.updateArtistNameLabel(text: song.artistName ?? "")
+        view?.updateCollectionNameLabel(text: song.collectionName ?? "")
         view?.updateProgressBarView()
         view?.setTitle("")
+        interactor?.isFavorite(trackId: song.trackId)
+        
         
     }
     
 }
 
 extension DetailPresenter: DetailInteractorOutputProtocol{
+    func handleCheckForSaveOrDelete(isFavorite: Bool) {
+        guard let song = view?.getSource() else { return }
+        if(!isFavorite){
+            self.interactor?.saveToFavorites(favorite: song)
+        }
+        else{
+            self.interactor?.deleteFromFavorites(trackId: song.trackId)
+        }
+        view?.updateLikeImageButton(isFavorite: !isFavorite)
+    }
+    
+    func handleIsFavorite(isFavorite: Bool) {
+        view?.updateLikeImageButton(isFavorite: isFavorite)
+    }
+    
     func handleUpdateProgress(elapsedTime: String,totalTime: String, progress: Double) {
         
         view?.startPlayAnimation(elapsedTime: elapsedTime,totalTime: totalTime, progress: progress)

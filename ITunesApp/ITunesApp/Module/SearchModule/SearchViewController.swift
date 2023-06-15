@@ -22,14 +22,23 @@ class SearchViewController: BaseViewController{
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var collectionView: UICollectionView!
     
+    @IBOutlet weak var emptyView: UIView!
+    @IBOutlet var backgroundView: UIView!
     var presenter: SearchPresenterProtocol!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         let heartButton = UIBarButtonItem(image: UIImage(systemName: "heart.fill"), style: .plain, target: self, action: #selector(heartButtonTapped))
-        heartButton.tintColor = UIColor.black
+        heartButton.tintColor = UIColor.white
             // Oluşturulan butonu navigationBar'ın sağ tarafına ekle
             navigationItem.rightBarButtonItem = heartButton
+        collectionView.backgroundColor = UIColor.clear
+        let colors: [UIColor] = [.black, .black.withAlphaComponent(0), .black.withAlphaComponent(0)]
+        backgroundView.setGradientBackground(colors: colors)
+        let backButton = UIBarButtonItem()
+        backButton.title = "Back"
+        navigationItem.backBarButtonItem = backButton
+        navigationController?.navigationBar.barTintColor = .white.withAlphaComponent(0)
         presenter.viewDidLoad()
     }
     @objc private func heartButtonTapped() {
@@ -62,6 +71,10 @@ extension SearchViewController: UICollectionViewDataSource, UICollectionViewDele
         presenter.didSelectRowAt(index: indexPath.row)
     }
     
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        CGSize(width: view.frame.width, height: 120)
+    }
+    
     
 }
 
@@ -76,6 +89,8 @@ extension SearchViewController: SearchViewControllerProtocol {
     
     func setTitle(_ title: String) {
         self.title = title
+        navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
+
     }
     
     func setupCollectionView() {
@@ -89,6 +104,11 @@ extension SearchViewController: SearchViewControllerProtocol {
         DispatchQueue.main.async { [weak self] in
             guard let self else { return }
             self.collectionView.reloadData()
+            if self.presenter.numberOfItems == 0 {
+                self.emptyView.isHidden = false
+            } else {
+                self.emptyView.isHidden = true
+            }
         }
     }
 }

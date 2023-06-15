@@ -13,10 +13,11 @@ protocol FavoriteCollectionViewCellProtocol: AnyObject{
     func setCollectionName(_ name: String)
     func setImage(_ url: String?)
     func setLikeImage(_ isFavorite: Bool)
+    func reloadData()
 }
 
 protocol FavoritesCollectionViewCellDelegate: AnyObject{
-    
+    func onCollectionReloaded()
 }
 
 class FavoritesCollectionViewCell: UICollectionViewCell {
@@ -24,6 +25,7 @@ class FavoritesCollectionViewCell: UICollectionViewCell {
     
     @IBOutlet weak var collectionName: UILabel!
     @IBOutlet weak var artistName: UILabel!
+    @IBOutlet weak var cellView: UIView!
     @IBOutlet weak var trackName: UILabel!
     @IBOutlet weak var likeButton: UIButton!
     weak var delegate: FavoritesCollectionViewCellDelegate?
@@ -31,18 +33,24 @@ class FavoritesCollectionViewCell: UICollectionViewCell {
     var cellPresenter: FavoritesCellPresenterProtocol! {
         didSet {
             cellPresenter.viewDidLoad()
-            self.layer.cornerRadius = 12
+            cellView.layer.cornerRadius = 12
             imageView.layer.cornerRadius = 12
             
         }
     }
 
     @IBAction func onLikeBUttonClicked(_ sender: Any) {
+        cellPresenter.deleteFromFavorites()
     }
 }
 
 extension FavoritesCollectionViewCell: FavoriteCollectionViewCellProtocol {
+    func reloadData() {
+        delegate?.onCollectionReloaded()
+    }
+    
     func setImage(_ url: String?) {
+        
         if let url = URL(string: url ?? ""){
             DispatchQueue.main.async {
                 self.imageView.sd_setImage(with: url)
@@ -75,3 +83,5 @@ extension FavoritesCollectionViewCell: FavoriteCollectionViewCellProtocol {
         self.collectionName.text = name
     }
 }
+
+

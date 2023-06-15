@@ -14,7 +14,7 @@ protocol SearchPresenterProtocol: AnyObject{
     var cellPadding: Double { get }
     var playingMusicIndex: Int { get set}
     func load(text: String)
-    func songAt(_ index: Int) -> Song?
+    func songAt(_ index: Int) -> SongEntity?
     func calculateCellHeight(collectionViewWidth: Double) -> (width: Double, height: Double)
     func didSelectRowAt(index: Int)
     func favoritesButtonTapped()
@@ -31,7 +31,7 @@ extension SearchPresenter {
 }
 
 final class SearchPresenter{
-    private var songs: [Song] = []
+    private var songs: [SongEntity] = []
     unowned var view: SearchViewControllerProtocol?
     let router: SearchRouterProtocol?
     private var playingIndex: Int?
@@ -69,10 +69,11 @@ extension SearchPresenter: SearchPresenterProtocol{
     
     func load(text: String) {
         timer?.invalidate()
-        timer = Timer.scheduledTimer(withTimeInterval: 0.3, repeats: false) { [weak self] _ in
+        timer = Timer.scheduledTimer(withTimeInterval: 0.5, repeats: false) { [weak self] _ in
             guard let self else { return }
             self.view?.showLoadingView()
-            self.interactor?.fetchSearchResults(text: text)
+            let replacedStr = text.replacingOccurrences(of: " ", with: "+")
+            self.interactor?.fetchSearchResults(text: replacedStr)
         }
         
     }
@@ -85,7 +86,7 @@ extension SearchPresenter: SearchPresenterProtocol{
         Constants.cellLeftPadding
     }
     
-    func songAt(_ index: Int) -> Song? {
+    func songAt(_ index: Int) -> SongEntity? {
         songs[index]
     }
     
@@ -111,7 +112,11 @@ extension SearchPresenter: SearchInteractorOutputProtocol{
         view?.hideLoadingView()
         switch result{
         case .success(let result):
-            self.songs = result.results ?? []
+            self.songs.removeAll()
+            result.results!.forEach { song in
+                self.songs.append(Helper.shared.createFavorite(from: song) )
+            }
+
             view?.reloadData()
         case .failure(let error):
             view?.showError(error.localizedDescription)

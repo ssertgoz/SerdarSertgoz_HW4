@@ -9,7 +9,7 @@ import Foundation
 
 public struct Song: Decodable {
     let kind: String?
-    let trackId: Double?
+    let trackId: Int?
     let artistName: String?
     let collectionName: String?
     let trackName: String?
@@ -87,7 +87,7 @@ public extension Song {
         return primaryGenreName
     }
     
-    var getTrackId: Double? {
+    var getTrackId: Int? {
         return trackId
     }
     

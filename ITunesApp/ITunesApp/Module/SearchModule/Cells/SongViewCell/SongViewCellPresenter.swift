@@ -5,7 +5,6 @@
 //  Created by serdar on 9.06.2023.
 //
 import UIKit
-import ITunesAPI
 
 protocol SongViewCellPresenterProtocol: AnyObject {
     func load()
@@ -18,13 +17,13 @@ final class SongViewCellPresenter {
     
     weak var view: SongViewCellProtocol?
     private let interactor: SongViewCellInteractorProtocol?
-    private let song: Song
+    private let song: SongEntity
     private var isPlaying: Bool = false
     
     init(
         view: SongViewCellProtocol?,
         interactor: SongViewCellInteractorProtocol,
-        song: Song
+        song: SongEntity
     ){
         self.view = view
         self.song = song
@@ -44,7 +43,7 @@ extension SongViewCellPresenter: SongViewCellPresenterProtocol {
             view?.stopPlayAnimation()
             isPlaying = false
         }else{
-            interactor?.playMusic(url: song.getPreviewURL ?? "")
+            interactor?.playMusic(url: song.previewUrl ?? "")
             view?.setPlayImage(true)
             isPlaying = true
         }
@@ -54,10 +53,10 @@ extension SongViewCellPresenter: SongViewCellPresenterProtocol {
     
     func load() {
         
-        view?.setImage(song.getArtworkURL)
-        view?.setArtistName(song.getArtist ?? "")
-        view?.setTrackName(song.getTrack ?? "")
-        view?.setCollectionName(song.getCollection ?? "")
+        view?.setImage(song.artworkUrl100)
+        view?.setArtistName(song.artistName ?? "")
+        view?.setTrackName(song.trackName ?? "")
+        view?.setCollectionName(song.collectionName ?? "")
         
     }
     
