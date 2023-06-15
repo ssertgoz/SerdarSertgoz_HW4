@@ -8,34 +8,67 @@
 import XCTest
 
 final class ITunesAppUITests: XCTestCase {
-
-    override func setUpWithError() throws {
-        // Put setup code here. This method is called before the invocation of each test method in the class.
-
-        // In UI tests it is usually best to stop immediately when a failure occurs.
+    private var app: XCUIApplication!
+    
+    override func setUp() {
+        super.setUp()
         continueAfterFailure = false
-
-        // In UI tests it’s important to set the initial state - such as interface orientation - required for your tests before they run. The setUp method is a good place to do this.
+        app = XCUIApplication()
     }
-
-    override func tearDownWithError() throws {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
-    }
-
+    
     func testExample() throws {
-        // UI tests must launch the application that they test.
-        let app = XCUIApplication()
         app.launch()
-
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
+        sleep(3)
+        XCTAssertTrue(app.isSearchBarDisplayed)
+        XCTAssertTrue(app.isCollectionviewDisplayed)
+        XCTAssertTrue(app.isEmptyviewDisplayed)
+        XCTAssertTrue(app.isBackgroundViewDisplayed)
+                
+        app.searchBar!.tap()
+        app.searchBar?.typeText("tarkan")
+        sleep(2)
+        app.collectionview.children(matching: .cell).element(boundBy: 0).staticTexts["Tarkan"].tap()
+        app/*@START_MENU_TOKEN@*/.images["play.fill"]/*[[".images[\"play\"]",".images[\"play.fill\"]"],[[[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/.tap()
+        sleep(10)
+        app.images["Stop"].tap()
+        sleep(1)
+        app.navigationBars["iTunes Search"].buttons["Back"].tap()
+        app.collectionview.children(matching: .cell).element(boundBy: 3).children(matching: .other).element.children(matching: .other).element.swipeUp()
+        sleep(1)
+        app.collectionview.children(matching: .cell).element(boundBy: 3).children(matching: .other).element.children(matching: .other).element.swipeDown()
+        
+        sleep(3)
     }
+}
 
-    func testLaunchPerformance() throws {
-        if #available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 7.0, *) {
-            // This measures how long it takes to launch your application.
-            measure(metrics: [XCTApplicationLaunchMetric()]) {
-                XCUIApplication().launch()
-            }
-        }
+extension XCUIApplication {
+    
+    var searchBar: XCUIElement! {
+        searchFields["Search"]
+    }
+    var collectionview: XCUIElement! {
+        collectionViews["collectionview"]
+    }
+    var emptyview: XCUIElement! {
+        otherElements["emptyview"]
+    }
+    var backgroundview: XCUIElement! {
+        otherElements["backgroundview"]
+    }
+    
+    var isSearchBarDisplayed: Bool {
+        searchBar.exists
+    }
+    
+    var isCollectionviewDisplayed: Bool {
+        collectionview.exists
+    }
+    
+    var isEmptyviewDisplayed: Bool {
+        emptyview.exists
+    }
+    
+    var isBackgroundViewDisplayed: Bool {
+        backgroundview.exists
     }
 }

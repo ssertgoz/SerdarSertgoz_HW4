@@ -29,6 +29,7 @@ class SearchViewController: BaseViewController{
     override func viewDidLoad() {
         super.viewDidLoad()
         presenter.viewDidLoad()
+        setAccessiblityIdentifiers()
     }
     
     @objc private func heartButtonTapped() {
@@ -97,6 +98,7 @@ extension SearchViewController: SearchViewControllerProtocol {
         collectionView.delegate = self
         collectionView.backgroundColor = UIColor.clear
         collectionView.register(cellType: SongViewCell.self)
+        
     }
     
     
@@ -111,5 +113,17 @@ extension SearchViewController: SearchViewControllerProtocol {
             }
         }
     }
+}
+
+
+extension SearchViewController {
+    
+    private func setAccessiblityIdentifiers() {
+        searchBar.accessibilityIdentifier = "searchBarIdentifier"
+        collectionView.accessibilityIdentifier = "collectionview"
+        emptyView.accessibilityIdentifier = "emptyview"
+        backgroundView.accessibilityIdentifier = "backgroundview"
+    }
+    
 }
 
