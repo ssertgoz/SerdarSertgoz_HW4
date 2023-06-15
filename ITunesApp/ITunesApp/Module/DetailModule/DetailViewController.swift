@@ -18,7 +18,6 @@ protocol DetailViewControllerProtocol: AnyObject{
     func updateProgressBarView(defaultTime: String)
     func updateLikeImageButton(isFavorite: Bool, normal: String, filled: String)
     func updateCollectionNameLabel(text: String)
-    func updatePlayImageButton(image: UIImage)
     func setPlayImage(_ isPlaying: Bool, _ stopImageName: String, _ playImageName: String)
     func startPlayAnimation(elapsedTime: String,totalTime: String, progress: Double)
     func stopPlayAnimation(_ stopImageName: String, _ playImageName: String)
@@ -145,9 +144,6 @@ extension DetailViewController: DetailViewControllerProtocol{
         collectionNameLabel.text = text
     }
     
-    func updatePlayImageButton(image: UIImage) {
-        playImageButton.image = image
-    }
     func setTitle(_ title: String) {
         self.title = title
         navigationController?.navigationBar.tintColor = UIColor.white

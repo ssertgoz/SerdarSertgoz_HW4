@@ -50,6 +50,10 @@
 		75BC137D2A327E67002F411C /* SplashPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75BC137C2A327E67002F411C /* SplashPresenter.swift */; };
 		75BC137F2A327F26002F411C /* SplashRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75BC137E2A327F26002F411C /* SplashRouter.swift */; };
 		75BC13812A327F34002F411C /* SplashInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75BC13802A327F34002F411C /* SplashInteractor.swift */; };
+		75BC1D952A3B464B00376EB6 /* SearchResult.json in Resources */ = {isa = PBXBuildFile; fileRef = 75FC20712A3B328D003F43F0 /* SearchResult.json */; };
+		75BC1D982A3B71E700376EB6 /* MockDetailInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75BC1D972A3B71E700376EB6 /* MockDetailInteractor.swift */; };
+		75BC1D9A2A3B73E200376EB6 /* MockDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75BC1D992A3B73E200376EB6 /* MockDetailViewController.swift */; };
+		75BC1D9C2A3B781700376EB6 /* MockDetailPresenterTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75BC1D9B2A3B781700376EB6 /* MockDetailPresenterTest.swift */; };
 		75ED21282A34C88D000CFC6A /* DetailViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 75ED21272A34C88D000CFC6A /* DetailViewController.storyboard */; };
 		75EF315F2A39346100DB9516 /* FavoritesViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 75EF315E2A39346100DB9516 /* FavoritesViewController.storyboard */; };
 		75EF31612A393B9700DB9516 /* FavoritesCollectionViewCellPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75EF31602A393B9700DB9516 /* FavoritesCollectionViewCellPresenter.swift */; };
@@ -61,6 +65,11 @@
 		75FC206B2A39DB61003F43F0 /* Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75FC206A2A39DB61003F43F0 /* Helper.swift */; };
 		75FC206D2A3AFF6E003F43F0 /* SplashViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 75FC206C2A3AFF6E003F43F0 /* SplashViewController.storyboard */; };
 		75FC206F2A3B2ADF003F43F0 /* ProgressBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75FC206E2A3B2ADF003F43F0 /* ProgressBarView.swift */; };
+		75FC20732A3B33D0003F43F0 /* MockSearchInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75FC20722A3B33D0003F43F0 /* MockSearchInteractor.swift */; };
+		75FC20752A3B36D8003F43F0 /* SDWebImage in Frameworks */ = {isa = PBXBuildFile; productRef = 75FC20742A3B36D8003F43F0 /* SDWebImage */; };
+		75FC20792A3B3882003F43F0 /* MockSearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75FC20782A3B3882003F43F0 /* MockSearchViewController.swift */; };
+		75FC207C2A3B3BB4003F43F0 /* MockSearchRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75FC207B2A3B3BB4003F43F0 /* MockSearchRouter.swift */; };
+		75FC207E2A3B3CC2003F43F0 /* SearchPresenterTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75FC207D2A3B3CC2003F43F0 /* SearchPresenterTest.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -126,6 +135,9 @@
 		75BC137C2A327E67002F411C /* SplashPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashPresenter.swift; sourceTree = "<group>"; };
 		75BC137E2A327F26002F411C /* SplashRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashRouter.swift; sourceTree = "<group>"; };
 		75BC13802A327F34002F411C /* SplashInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashInteractor.swift; sourceTree = "<group>"; };
+		75BC1D972A3B71E700376EB6 /* MockDetailInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockDetailInteractor.swift; sourceTree = "<group>"; };
+		75BC1D992A3B73E200376EB6 /* MockDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockDetailViewController.swift; sourceTree = "<group>"; };
+		75BC1D9B2A3B781700376EB6 /* MockDetailPresenterTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockDetailPresenterTest.swift; sourceTree = "<group>"; };
 		75ED21272A34C88D000CFC6A /* DetailViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = DetailViewController.storyboard; sourceTree = "<group>"; };
 		75EF315E2A39346100DB9516 /* FavoritesViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = FavoritesViewController.storyboard; sourceTree = "<group>"; };
 		75EF31602A393B9700DB9516 /* FavoritesCollectionViewCellPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesCollectionViewCellPresenter.swift; sourceTree = "<group>"; };
@@ -138,6 +150,11 @@
 		75FC206A2A39DB61003F43F0 /* Helper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Helper.swift; sourceTree = "<group>"; };
 		75FC206C2A3AFF6E003F43F0 /* SplashViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = SplashViewController.storyboard; sourceTree = "<group>"; };
 		75FC206E2A3B2ADF003F43F0 /* ProgressBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressBarView.swift; sourceTree = "<group>"; };
+		75FC20712A3B328D003F43F0 /* SearchResult.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = SearchResult.json; sourceTree = "<group>"; };
+		75FC20722A3B33D0003F43F0 /* MockSearchInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockSearchInteractor.swift; sourceTree = "<group>"; };
+		75FC20782A3B3882003F43F0 /* MockSearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockSearchViewController.swift; sourceTree = "<group>"; };
+		75FC207B2A3B3BB4003F43F0 /* MockSearchRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockSearchRouter.swift; sourceTree = "<group>"; };
+		75FC207D2A3B3CC2003F43F0 /* SearchPresenterTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchPresenterTest.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -155,6 +172,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				75FC20752A3B36D8003F43F0 /* SDWebImage in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -218,7 +236,6 @@
 			isa = PBXGroup;
 			children = (
 				75BC136C2A3265C0002F411C /* App */,
-				75BC13582A324DA5002F411C /* Cells */,
 				75BC13532A324D20002F411C /* Extensions */,
 				75BC13682A326378002F411C /* Module */,
 				75BC135A2A324DBF002F411C /* Utils */,
@@ -235,6 +252,7 @@
 		757478F92A311F6A002E0E06 /* ITunesAppTests */ = {
 			isa = PBXGroup;
 			children = (
+				75FC20702A3B3219003F43F0 /* Mock */,
 				757478FA2A311F6A002E0E06 /* ITunesAppTests.swift */,
 			);
 			path = ITunesAppTests;
@@ -296,13 +314,6 @@
 				7552F0472A379FF0001D1EAD /* UIImageView+Extension.swift */,
 			);
 			path = Extensions;
-			sourceTree = "<group>";
-		};
-		75BC13582A324DA5002F411C /* Cells */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Cells;
 			sourceTree = "<group>";
 		};
 		75BC13592A324DAD002F411C /* Views */ = {
@@ -398,6 +409,16 @@
 			path = SongViewCell;
 			sourceTree = "<group>";
 		};
+		75BC1D962A3B71B100376EB6 /* MockDetail */ = {
+			isa = PBXGroup;
+			children = (
+				75BC1D972A3B71E700376EB6 /* MockDetailInteractor.swift */,
+				75BC1D992A3B73E200376EB6 /* MockDetailViewController.swift */,
+				75BC1D9B2A3B781700376EB6 /* MockDetailPresenterTest.swift */,
+			);
+			path = MockDetail;
+			sourceTree = "<group>";
+		};
 		75EF31662A39B16F00DB9516 /* Repostories */ = {
 			isa = PBXGroup;
 			children = (
@@ -413,6 +434,27 @@
 				753951D42A3462EC00072E18 /* MusicPlayer */,
 			);
 			name = Packages;
+			sourceTree = "<group>";
+		};
+		75FC20702A3B3219003F43F0 /* Mock */ = {
+			isa = PBXGroup;
+			children = (
+				75FC20712A3B328D003F43F0 /* SearchResult.json */,
+				75BC1D962A3B71B100376EB6 /* MockDetail */,
+				75FC207A2A3B3B95003F43F0 /* MockSearch */,
+			);
+			path = Mock;
+			sourceTree = "<group>";
+		};
+		75FC207A2A3B3B95003F43F0 /* MockSearch */ = {
+			isa = PBXGroup;
+			children = (
+				75FC20722A3B33D0003F43F0 /* MockSearchInteractor.swift */,
+				75FC20782A3B3882003F43F0 /* MockSearchViewController.swift */,
+				75FC207B2A3B3BB4003F43F0 /* MockSearchRouter.swift */,
+				75FC207D2A3B3CC2003F43F0 /* SearchPresenterTest.swift */,
+			);
+			path = MockSearch;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -451,9 +493,13 @@
 			buildRules = (
 			);
 			dependencies = (
+				75FC20772A3B36FB003F43F0 /* PBXTargetDependency */,
 				757478F82A311F6A002E0E06 /* PBXTargetDependency */,
 			);
 			name = ITunesAppTests;
+			packageProductDependencies = (
+				75FC20742A3B36D8003F43F0 /* SDWebImage */,
+			);
 			productName = ITunesAppTests;
 			productReference = 757478F62A311F6A002E0E06 /* ITunesAppTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
@@ -543,6 +589,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				75BC1D952A3B464B00376EB6 /* SearchResult.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -606,6 +653,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				75FC20732A3B33D0003F43F0 /* MockSearchInteractor.swift in Sources */,
+				75FC20792A3B3882003F43F0 /* MockSearchViewController.swift in Sources */,
+				75BC1D9A2A3B73E200376EB6 /* MockDetailViewController.swift in Sources */,
+				75FC207E2A3B3CC2003F43F0 /* SearchPresenterTest.swift in Sources */,
+				75BC1D982A3B71E700376EB6 /* MockDetailInteractor.swift in Sources */,
+				75BC1D9C2A3B781700376EB6 /* MockDetailPresenterTest.swift in Sources */,
+				75FC207C2A3B3BB4003F43F0 /* MockSearchRouter.swift in Sources */,
 				757478FB2A311F6A002E0E06 /* ITunesAppTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -631,6 +685,10 @@
 			isa = PBXTargetDependency;
 			target = 757478DC2A311F69002E0E06 /* ITunesApp */;
 			targetProxy = 757479012A311F6A002E0E06 /* PBXContainerItemProxy */;
+		};
+		75FC20772A3B36FB003F43F0 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			productRef = 75FC20762A3B36FB003F43F0 /* SDWebImage */;
 		};
 /* End PBXTargetDependency section */
 
@@ -963,6 +1021,16 @@
 		75BC133B2A31E9EB002F411C /* ITunesAPI */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = ITunesAPI;
+		};
+		75FC20742A3B36D8003F43F0 /* SDWebImage */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 7552F0402A378CD1001D1EAD /* XCRemoteSwiftPackageReference "SDWebImage" */;
+			productName = SDWebImage;
+		};
+		75FC20762A3B36FB003F43F0 /* SDWebImage */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 7552F0402A378CD1001D1EAD /* XCRemoteSwiftPackageReference "SDWebImage" */;
+			productName = SDWebImage;
 		};
 /* End XCSwiftPackageProductDependency section */
 
