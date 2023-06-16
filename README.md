@@ -5,7 +5,7 @@
 ![Platform](https://img.shields.io/badge/platform-iOS-lightgrey.svg)
 ![iOS](https://img.shields.io/badge/iOS-13.0%2B-blue.svg)
 
-![Detail](screenshots/detail5.png) ![Detail](screenshots/detail6.png)
+![Detail](screenshots/small/detail5.png) ![Detail](screenshots/small/detail6.png)
 iTunesApp is a feature-rich music application that harnesses the power of the iTunes API to deliver an immersive and delightful music discovery experience to users. Developed specifically for iOS devices running iOS 13.0 and above, the app offers a seamless and intuitive interface for users to explore and enjoy their favorite music.
 
 With iTunesApp, users can dive into a vast collection of songs, albums, and artists available through the iTunes API. The app provides a comprehensive search functionality, allowing users to easily find their desired tracks and discover new music across various genres.
@@ -35,11 +35,11 @@ To enhance the visual appeal of the app, iTunesApp seamlessly integrates with th
 
 ## Screenshots
 
-![Search](screenshots/search1.png)  ![Search Results](screenshots/search2.png)
+![Search](screenshots/small/search1.png)  ![Search Results](screenshots/small/search2.png)
 
-![Favorites](screenshots/favorites.png) ![Detail](screenshots/detail4.png)
+![Favorites](screenshots/small/favorites.png) ![Detail](screenshots/small/detail4.png)
 
-![Detail](screenshots/detail1.png) ![Detail](screenshots/detail2.png)
+![Detail](screenshots/small/detail1.png) ![Detail](screenshots/small/detail2.png)
 
 
 ## Unit Tests
