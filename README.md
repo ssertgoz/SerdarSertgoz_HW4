@@ -6,6 +6,9 @@
 ![iOS](https://img.shields.io/badge/iOS-13.0%2B-blue.svg)
 
 ![Detail](screenshots/small/detail5.png) ![Detail](screenshots/small/detail6.png)
+
+
+
 iTunesApp is a feature-rich music application that harnesses the power of the iTunes API to deliver an immersive and delightful music discovery experience to users. Developed specifically for iOS devices running iOS 13.0 and above, the app offers a seamless and intuitive interface for users to explore and enjoy their favorite music.
 
 With iTunesApp, users can dive into a vast collection of songs, albums, and artists available through the iTunes API. The app provides a comprehensive search functionality, allowing users to easily find their desired tracks and discover new music across various genres.
