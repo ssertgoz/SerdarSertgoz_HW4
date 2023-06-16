@@ -16,6 +16,10 @@ protocol SearchPresenterProtocol: AnyObject{
     func calculateCellHeight(collectionViewWidth: Double) -> (width: Double, height: Double)
     func didSelectRowAt(index: Int)
     func favoritesButtonTapped()
+    var playingIndexPath: IndexPath? { get set }
+    var defaultIndex: Int { get }
+    func reloadCollectionView()
+    
 }
 
 extension SearchPresenter {
@@ -26,6 +30,7 @@ extension SearchPresenter {
         static let backButtonTitle: String = "Back"
         static let cellHeightFactor: Double = 3.5
         static let delayTime: Double = 0.5
+        static let defaultIndexPathIndex = 1000 // indicates thet no music playing
     }
 }
 
@@ -35,6 +40,7 @@ final class SearchPresenter{
     let router: SearchRouterProtocol?
     private let interactor: SearchInteractorProtocol?
     private var timer: Timer?
+    private var playingIndex: IndexPath?
     
     init(view: SearchViewControllerProtocol?, interactor: SearchInteractorProtocol, router: SearchRouterProtocol) {
         self.view = view
@@ -45,6 +51,23 @@ final class SearchPresenter{
 
 
 extension SearchPresenter: SearchPresenterProtocol{
+    func reloadCollectionView() {
+        view?.reloadData()
+    }
+    
+    var defaultIndex: Int {
+        Constants.defaultIndexPathIndex
+    }
+    
+    var playingIndexPath: IndexPath? {
+        get {
+            playingIndex
+        }
+        set {
+            playingIndex = newValue
+        }
+    }
+    
     
     func calculateCellHeight(collectionViewWidth: Double) -> (width: Double, height: Double) {
         (collectionViewWidth, collectionViewWidth/Constants.cellHeightFactor)
@@ -80,6 +103,7 @@ extension SearchPresenter: SearchPresenterProtocol{
     
     func didSelectRowAt(index: Int) {
         guard let source = songAt(index) else { return }
+        interactor?.pauseMusic()
         router?.navigateTo(.detailScreen(source: source))
     }
 }

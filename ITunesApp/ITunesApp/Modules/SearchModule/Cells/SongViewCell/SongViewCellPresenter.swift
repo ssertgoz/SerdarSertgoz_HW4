@@ -7,8 +7,9 @@
 import UIKit
 
 protocol SongViewCellPresenterProtocol: AnyObject {
-    func load()
+    func load(isPlaying: Bool)
     func playMusic()
+    func pauseMusic(_ isTapped: Bool)
 }
 
 extension SongViewCellPresenter {
@@ -40,12 +41,18 @@ final class SongViewCellPresenter {
 
 extension SongViewCellPresenter: SongViewCellPresenterProtocol {
     
+    func pauseMusic(_ isTapped: Bool = true){
+        if(isTapped){
+            interactor?.pauseMusic()
+        }
+        view?.setPlayImage(false, stopImage: Constants.stopImage, playImage: Constants.playImage)
+        view?.stopPlayAnimation()
+        isPlaying = false
+    }
+    
     func playMusic() {
         if isPlaying{
-            interactor?.pauseMusic()
-            view?.setPlayImage(false, stopImage: Constants.stopImage, playImage: Constants.playImage)
-            view?.stopPlayAnimation()
-            isPlaying = false
+            pauseMusic()
         }else{
             interactor?.playMusic(url: song.previewUrl ?? "")
             view?.setPlayImage(true, stopImage: Constants.stopImage, playImage: Constants.playImage)
@@ -53,12 +60,17 @@ extension SongViewCellPresenter: SongViewCellPresenterProtocol {
         }
     }
     
-    func load() {
+    func load(isPlaying: Bool) {
         view?.setImage(song.artworkUrl100)
         view?.setArtistName(song.artistName ?? "")
         view?.setTrackName(song.trackName ?? "")
         view?.setCollectionName(song.collectionName ?? "")
         view?.setCornerRadius(radius: Constants.cellCornerRadius)
+        if(isPlaying){
+            
+            interactor?.continueToPlay()
+        }
+        view?.setPlayImage(isPlaying, stopImage: Constants.stopImage, playImage: Constants.playImage)
     }
     
 }
@@ -72,6 +84,7 @@ extension SongViewCellPresenter: SongViewCellInteractorOutputProtocol{
         interactor?.pauseMusic()
         view?.setPlayImage(false, stopImage: Constants.stopImage, playImage: Constants.playImage)
         view?.stopPlayAnimation()
+        view?.handlePlayingIndexWhenFinish()
         isPlaying = false
     }
     

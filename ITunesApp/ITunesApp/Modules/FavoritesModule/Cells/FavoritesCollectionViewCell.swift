@@ -21,7 +21,7 @@ protocol FavoritesCollectionViewCellDelegate: AnyObject{
     func onCollectionReloaded()
 }
 
-class FavoritesCollectionViewCell: UICollectionViewCell {
+final class FavoritesCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var imageView: UIImageView!
     
     @IBOutlet weak var collectionName: UILabel!

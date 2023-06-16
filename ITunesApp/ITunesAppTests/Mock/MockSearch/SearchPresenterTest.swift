@@ -52,7 +52,7 @@ final class SearchPresenterTest: XCTestCase {
         
     }
     
-    func test_fetchNewsOutput() {
+    func test_fetchSearchOutput() {
 
         XCTAssertFalse(view.isInvokedHideLoading)
         XCTAssertEqual(presenter.numberOfItems, 0)

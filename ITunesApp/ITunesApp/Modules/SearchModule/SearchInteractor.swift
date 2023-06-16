@@ -7,9 +7,11 @@
 
 import Foundation
 import ITunesAPI
+import MusicPlayer
 
 protocol SearchInteractorProtocol: AnyObject{
     func fetchSearchResults(text: String)
+    func pauseMusic()
 }
 
 protocol SearchInteractorOutputProtocol: AnyObject{
@@ -17,15 +19,20 @@ protocol SearchInteractorOutputProtocol: AnyObject{
 }
 
 fileprivate let service: ITunesServiceProtocol = API.shared
+fileprivate let musicPlayer: MusicPlayerProtocol = MusicPlayer.shared
 
 final class SearchInteractor{
     weak var output: SearchInteractorOutputProtocol?
 }
 
 extension SearchInteractor: SearchInteractorProtocol{
+    func pauseMusic() {
+        musicPlayer.pause()
+    }
+    
     
     func fetchSearchResults(text: String) {
-       
+        
         service.fetchSearchResults(text: text) { [weak self] response in
             guard let self else {return}
             self.output?.handleSearchResult(response)

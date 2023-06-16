@@ -24,12 +24,11 @@ protocol DetailViewControllerProtocol: AnyObject{
     func getSource() -> SongEntity?
 }
 
-class DetailViewController: BaseViewController {
+final class DetailViewController: BaseViewController {
     
     @IBOutlet weak var gradientView: UIView!
     @IBOutlet weak var trackNameLabel: UILabel!
     @IBOutlet weak var trackImage: UIImageView!
-    
     @IBOutlet weak var colorView: UIView!
     @IBOutlet weak var genreNameLabel: UILabel!
     @IBOutlet weak var collectionPriceLabel: UILabel!
@@ -39,6 +38,8 @@ class DetailViewController: BaseViewController {
     @IBOutlet weak var likeImageButton: UIImageView!
     @IBOutlet weak var collectionNameLabel: UILabel!
     @IBOutlet weak var playImageButton: UIImageView!
+    @IBOutlet weak var goForwardImageView: UIImageView!
+    @IBOutlet weak var goBackwardImageView: UIImageView!
     private var progressBar: ProgressBarView!
     var presenter: DetailPresenterProtocol!
     var source: SongEntity?
@@ -48,12 +49,21 @@ class DetailViewController: BaseViewController {
         presenter.viewDidLoad()
         
     }
+    override func viewWillDisappear(_ animated: Bool) {
+        presenter.pauseMusic()
+    }
     
     @objc private func imageViewTapped() {
         presenter.playMusic()
     }
     @objc private func likeImageButtonTapped() {
         presenter.saveToFavorites()
+    }
+    @objc private func goForwardImageViewTapped() {
+        presenter.goForward()
+    }
+    @objc private func goBackwardImageButtonTapped() {
+        presenter.goBackward()
     }
     
 }
@@ -151,6 +161,12 @@ extension DetailViewController: DetailViewControllerProtocol{
         playImageButton.addGestureRecognizer(tapGesture)
         let likeImageTapGesture = UITapGestureRecognizer(target: self, action: #selector(likeImageButtonTapped))
         likeImageButton.addGestureRecognizer(likeImageTapGesture)
+        
+        let goForwardGesture = UITapGestureRecognizer(target: self, action: #selector(goForwardImageViewTapped))
+        goForwardImageView.addGestureRecognizer(goForwardGesture)
+        
+        let goBackwardTapGesture = UITapGestureRecognizer(target: self, action: #selector(goBackwardImageButtonTapped))
+        goBackwardImageView.addGestureRecognizer(goBackwardTapGesture)
     }
 }
 

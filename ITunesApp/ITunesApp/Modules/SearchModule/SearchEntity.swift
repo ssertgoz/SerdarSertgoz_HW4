@@ -8,7 +8,7 @@
 import Foundation
 import CoreData
 
-class SongEntity{
+final class SongEntity{
     var kind: String?
     var trackId: Int
     var artistName: String?

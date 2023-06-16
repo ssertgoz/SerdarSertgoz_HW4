@@ -10,6 +10,21 @@ import Foundation
 
 final class MockDetailInteractor: DetailInteractorProtocol{
     
+    var isInvokedGoForward = false
+    var invokedGoForwardCount = 0
+    func goForward(second: Int) {
+        isInvokedGoForward = true
+        invokedGoForwardCount = 1
+    }
+    
+    var isInvokedGoBackward = false
+    var invokedGoForaBackwardCount = 0
+    func goBackward(second: Int) {
+        isInvokedGoBackward = true
+        invokedGoForaBackwardCount = 1
+    }
+    
+    
     var isInvokedPlayMusic = false
     var inkovedPlayMusicCount = 0
     func playMusic(url: String) {

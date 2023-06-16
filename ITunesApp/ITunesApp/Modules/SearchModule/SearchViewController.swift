@@ -18,19 +18,20 @@ protocol SearchViewControllerProtocol: AnyObject {
 }
 
 
-class SearchViewController: BaseViewController{
+final class SearchViewController: BaseViewController{
     
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var emptyView: UIView!
     @IBOutlet weak var backgroundView: UIView!
     var presenter: SearchPresenterProtocol!
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         presenter.viewDidLoad()
         setAccessiblityIdentifiers()
     }
+    
     
     @objc private func heartButtonTapped() {
         presenter.favoritesButtonTapped()
@@ -46,16 +47,26 @@ extension SearchViewController: UICollectionViewDataSource, UICollectionViewDele
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeCell(cellType: SongViewCell.self, indexPath: indexPath)
         let interactor = SongViewCellInteractor()
+        if(self.presenter.playingIndexPath == nil){
+            presenter.playingIndexPath = indexPath
+            presenter.playingIndexPath?.row = presenter.defaultIndex
+        }
         if let song = presenter.songAt(indexPath.row){
             let presenter = SongViewCellPresenter(view: cell, interactor: interactor, song: song)
             cell.cellPresenter = presenter
             interactor.output = presenter
+            cell.delegate = self
+            cell.indexPathOfCell = indexPath
+            cell.isPlaying = indexPath.row == self.presenter.playingIndexPath?.row
         }
         return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        presenter.playingIndexPath?.row = presenter.defaultIndex
+        presenter.reloadCollectionView()
         presenter.didSelectRowAt(index: indexPath.row)
+        
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
@@ -63,6 +74,32 @@ extension SearchViewController: UICollectionViewDataSource, UICollectionViewDele
         return CGSize(width: size.width, height: size.height)
     }
     
+    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+        if(presenter.playingIndexPath?.row == indexPath.row){
+            (cell as! SongViewCell).isPlaying = true
+        }
+        else {
+            (cell as! SongViewCell).isPlaying = false
+        }
+    }
+    
+    
+}
+
+extension SearchViewController: SongViewCellDelegate {
+    func onPlayButtonCliccked(indexPathOfCell: IndexPath, isPlaying: Bool) {
+        if(!isPlaying && presenter.playingIndexPath?.row != indexPathOfCell.row){
+            let indexPathsToReload = collectionView.indexPathsForVisibleItems.filter { $0 == presenter.playingIndexPath }
+            presenter.playingIndexPath = indexPathOfCell
+            collectionView.reloadItems(at: indexPathsToReload)
+        }
+        else {
+            presenter.playingIndexPath = indexPathOfCell
+            presenter.playingIndexPath?.row = presenter.defaultIndex
+            presenter.reloadCollectionView()
+        }
+        
+    }
     
 }
 

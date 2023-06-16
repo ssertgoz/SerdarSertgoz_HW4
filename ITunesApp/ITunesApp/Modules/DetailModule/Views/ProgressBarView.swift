@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-class ProgressBarView: UIView {
+final class ProgressBarView: UIView {
     private var progressLayer: CALayer!
     private var progress: CGFloat = 0.0
     private var backgroundLayer: CALayer!

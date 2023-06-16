@@ -11,8 +11,10 @@ import SDWebImage
 protocol DetailPresenterProtocol: AnyObject{
     func viewDidLoad()
     func playMusic()
+    func pauseMusic()
     func saveToFavorites()
-    
+    func goForward()
+    func goBackward()
     func calculateProgressBarSize(width: Double) -> (width: Double, height: Double)
 }
 
@@ -21,6 +23,7 @@ extension DetailPresenter {
         static let cellCornerRadius: Double = 12
         static let progressBarPadding: Double = 40
         static let progressBarHeight: Double = 35
+        static let setTimeConstant: Int = 5
         static let normalHeartImage: String = "heart"
         static let filledHeartImage: String = "heart.fill"
         static let defaultTime: String = "00:00"
@@ -42,6 +45,32 @@ final class DetailPresenter{
 }
 
 extension DetailPresenter: DetailPresenterProtocol{
+    func goForward() {
+        guard let song = view?.getSource() else { return }
+        if isPlaying {
+            interactor?.goForward(second: Constants.setTimeConstant)
+        }
+        else{
+            interactor?.playMusic(url: song.previewUrl ?? "")
+            view?.setPlayImage(true, Constants.stopImageName, Constants.playImageName)
+            isPlaying = true
+            interactor?.goForward(second: Constants.setTimeConstant)
+        }
+    }
+    
+    func goBackward() {
+        guard let song = view?.getSource() else { return }
+        if isPlaying {
+            interactor?.goBackward(second: Constants.setTimeConstant)
+        }
+        else{
+            interactor?.playMusic(url: song.previewUrl ?? "")
+            view?.setPlayImage(true, Constants.stopImageName, Constants.playImageName)
+            isPlaying = true
+            interactor?.goBackward(second: Constants.setTimeConstant)
+        }
+    }
+    
     func calculateProgressBarSize(width: Double) -> (width: Double, height: Double) {
         (width - Constants.progressBarPadding, Constants.progressBarHeight)
     }
@@ -52,13 +81,17 @@ extension DetailPresenter: DetailPresenterProtocol{
         
     }
     
+    func pauseMusic() {
+        interactor?.pauseMusic()
+        view?.setPlayImage(false, Constants.stopImageName, Constants.playImageName)
+        view?.stopPlayAnimation( Constants.stopImageName, Constants.playImageName)
+        isPlaying = false
+    }
+    
     func playMusic() {
-        guard let song = view?.getSource() else { return }
+        guard let song = self.view?.getSource() else { return }
         if isPlaying{
-            interactor?.pauseMusic()
-            view?.setPlayImage(false, Constants.stopImageName, Constants.playImageName)
-            view?.stopPlayAnimation( Constants.stopImageName, Constants.playImageName)
-            isPlaying = false
+            pauseMusic()
         }else{
             interactor?.playMusic(url: song.previewUrl ?? "")
             view?.setPlayImage(true, Constants.stopImageName, Constants.playImageName)
@@ -68,7 +101,7 @@ extension DetailPresenter: DetailPresenterProtocol{
     }
     
     func viewDidLoad() {
-        guard let song = view?.getSource() else { return }
+        guard let song = self.view?.getSource() else { return }
         var imgUrl = song.artworkUrl100
         imgUrl?.getHighResloutionImageUrl()
         view?.updateTrackImage(url: imgUrl!)
@@ -88,7 +121,7 @@ extension DetailPresenter: DetailPresenterProtocol{
 
 extension DetailPresenter: DetailInteractorOutputProtocol{
     func handleCheckForSaveOrDelete(isFavorite: Bool) {
-        guard let song = view?.getSource() else { return }
+        guard let song = self.view?.getSource() else { return }
         if(!isFavorite){
             self.interactor?.saveToFavorites(favorite: song)
         }

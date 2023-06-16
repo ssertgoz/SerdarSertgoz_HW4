@@ -16,6 +16,8 @@ protocol DetailInteractorProtocol: AnyObject{
     func isFavorite(trackId: Int)
     func checkForSaveOrDelete(trackId: Int)
     func deleteFromFavorites(trackId: Int)
+    func goForward(second: Int)
+    func goBackward(second: Int)
 }
 
 protocol DetailInteractorOutputProtocol: AnyObject{
@@ -35,7 +37,6 @@ final class DetailInteractor{
     private var progress: Double!
     
     @objc func updateProgressView() {
-        musicPlayer.getPlayer()?.volume = 1
         let currentTime =  Double(musicPlayer.getPlayer()?.currentItem?.currentTime().seconds ?? 0)
         let duration = Double(musicPlayer.getPlayer()?.currentItem?.duration.seconds ?? 0)
         progress = Double(currentTime / duration)
@@ -45,6 +46,14 @@ final class DetailInteractor{
 
 
 extension DetailInteractor: DetailInteractorProtocol{
+    func goForward(second: Int) {
+        musicPlayer.setCurentTime(second: second, isForward: true)
+    }
+    
+    func goBackward(second: Int) {
+        musicPlayer.setCurentTime(second: second, isForward: false)
+    }
+    
     func deleteFromFavorites(trackId: Int) {
         favoritesRepository.deleteFavorite(trackId: trackId)
     }

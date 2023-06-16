@@ -13,7 +13,7 @@ protocol FavoritesViewControllerProtocol: AnyObject{
     func setupCollectionView()
 }
 
-class FavoritesViewController: UIViewController {
+final class FavoritesViewController: UIViewController {
     
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet var backgroundView: UIView!
@@ -52,7 +52,8 @@ extension FavoritesViewController: UICollectionViewDataSource, UICollectionViewD
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        CGSize(width: view.frame.width, height: 120)
+        let size = presenter.calculateCellHeight(collectionViewWidth: view.frame.width)
+        return CGSize(width: size.width, height: size.height)
     }
 }
 
@@ -90,6 +91,5 @@ extension FavoritesViewController: FavoritesCollectionViewCellDelegate{
         presenter.viewDidLoad()
         collectionView.reloadData()
     }
-    
     
 }

@@ -16,10 +16,15 @@ protocol SongViewCellProtocol: AnyObject{
     func setPlayImage(_ isPlaying: Bool, stopImage: String, playImage: String)
     func startPlayAnimation(startAngle: Double, endAngle: Double, progress: Double, lineWiidth: Double, animationDuration: Double)
     func stopPlayAnimation()
+    func handlePlayingIndexWhenFinish()
+}
+
+protocol SongViewCellDelegate {
+    func onPlayButtonCliccked(indexPathOfCell: IndexPath, isPlaying: Bool)
 }
 
 
-class SongViewCell: UICollectionViewCell {
+final class SongViewCell: UICollectionViewCell {
     
     @IBOutlet weak var artistNameLabel: UILabel!
     @IBOutlet weak var trackNameLabel: UILabel!
@@ -27,21 +32,38 @@ class SongViewCell: UICollectionViewCell {
     @IBOutlet weak var image: UIImageView!
     @IBOutlet weak var playImage: UIImageView!
     @IBOutlet weak var cellView: UIView!
+    var indexPathOfCell: IndexPath!
+    var isPlaying: Bool = false  {
+        didSet{
+            cellPresenter.load(isPlaying: isPlaying)
+        }
+    }
+    var delegate: SongViewCellDelegate!
     
     
     var cellPresenter: SongViewCellPresenterProtocol! {
         didSet {
-            cellPresenter.load()
+            cellPresenter.load(isPlaying: isPlaying)
+            if(!isPlaying ){
+                cellPresenter.pauseMusic(false)
+            }
         }
     }
     
     @IBAction func onPlayButtonClicked(_ sender: Any) {
+        delegate.onPlayButtonCliccked(indexPathOfCell: indexPathOfCell, isPlaying: isPlaying)
         cellPresenter.playMusic()
     }
 
 }
 
 extension SongViewCell: SongViewCellProtocol{
+    func handlePlayingIndexWhenFinish() {
+        DispatchQueue.main.async(execute: {
+            self.delegate.onPlayButtonCliccked(indexPathOfCell: self.indexPathOfCell, isPlaying: false)
+        })
+    }
+    
     func setCornerRadius(radius: Double) {
         cellView.layer.cornerRadius = radius
         image.layer.cornerRadius = radius
@@ -70,6 +92,7 @@ extension SongViewCell: SongViewCellProtocol{
     }
     
     func stopPlayAnimation() {
+        
         layer.sublayers?.forEach { layer in
             if layer is CAShapeLayer {
                 layer.removeFromSuperlayer()
@@ -87,7 +110,9 @@ extension SongViewCell: SongViewCellProtocol{
     }
     
     func setPlayImage(_ isPlaying: Bool, stopImage: String, playImage: String) {
+        
         DispatchQueue.main.async {
+            
             if isPlaying {
                 self.playImage.image = UIImage(systemName: stopImage)
             }

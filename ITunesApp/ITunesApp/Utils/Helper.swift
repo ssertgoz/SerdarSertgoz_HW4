@@ -8,7 +8,7 @@
 import Foundation
 import ITunesAPI
 
-class Helper{
+final class Helper{
     static let shared = Helper()
     
     func createFavorite(from song: Song) -> SongEntity {

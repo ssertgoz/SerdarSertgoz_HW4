@@ -10,6 +10,14 @@ import Foundation
 
 final class MockSearchInteractor: SearchInteractorProtocol{
     
+    var isInvokedPauseMusic = false
+    var inkovedPauseMusicCount = 0
+    func pauseMusic() {
+        isInvokedPauseMusic = true
+        inkovedPauseMusicCount += 1
+    }
+    
+    
     var isInvokedFetchSearchResults = false
     var inkovedFetchSearchResultsCount = 0
     

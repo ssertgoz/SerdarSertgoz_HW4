@@ -27,7 +27,6 @@
 		757478EB2A311F69002E0E06 /* ITunesApp.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 757478E92A311F69002E0E06 /* ITunesApp.xcdatamodeld */; };
 		757478ED2A311F6A002E0E06 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 757478EC2A311F6A002E0E06 /* Assets.xcassets */; };
 		757478F02A311F6A002E0E06 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 757478EE2A311F6A002E0E06 /* LaunchScreen.storyboard */; };
-		757478FB2A311F6A002E0E06 /* ITunesAppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 757478FA2A311F6A002E0E06 /* ITunesAppTests.swift */; };
 		757479052A311F6A002E0E06 /* ITunesAppUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 757479042A311F6A002E0E06 /* ITunesAppUITests.swift */; };
 		757479072A311F6A002E0E06 /* ITunesAppUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 757479062A311F6A002E0E06 /* ITunesAppUITestsLaunchTests.swift */; };
 		75BC133C2A31E9EB002F411C /* ITunesAPI in Frameworks */ = {isa = PBXBuildFile; productRef = 75BC133B2A31E9EB002F411C /* ITunesAPI */; };
@@ -43,7 +42,6 @@
 		75BC135C2A324DF1002F411C /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75BC135B2A324DF1002F411C /* LoadingView.swift */; };
 		75BC135E2A324E1B002F411C /* LoadingShowable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75BC135D2A324E1B002F411C /* LoadingShowable.swift */; };
 		75BC136A2A32638B002F411C /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75BC13692A32638B002F411C /* BaseViewController.swift */; };
-		75BC136F2A326C57002F411C /* ClassName+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75BC136E2A326C57002F411C /* ClassName+Extension.swift */; };
 		75BC13752A327D29002F411C /* SongViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75BC13732A327D29002F411C /* SongViewCell.swift */; };
 		75BC13762A327D29002F411C /* SongViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 75BC13742A327D29002F411C /* SongViewCell.xib */; };
 		75BC137A2A327DA9002F411C /* SplashViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75BC13782A327DA9002F411C /* SplashViewController.swift */; };
@@ -112,7 +110,6 @@
 		757478EF2A311F6A002E0E06 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		757478F12A311F6A002E0E06 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		757478F62A311F6A002E0E06 /* ITunesAppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ITunesAppTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		757478FA2A311F6A002E0E06 /* ITunesAppTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ITunesAppTests.swift; sourceTree = "<group>"; };
 		757479002A311F6A002E0E06 /* ITunesAppUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ITunesAppUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		757479042A311F6A002E0E06 /* ITunesAppUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ITunesAppUITests.swift; sourceTree = "<group>"; };
 		757479062A311F6A002E0E06 /* ITunesAppUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ITunesAppUITestsLaunchTests.swift; sourceTree = "<group>"; };
@@ -128,7 +125,6 @@
 		75BC135B2A324DF1002F411C /* LoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
 		75BC135D2A324E1B002F411C /* LoadingShowable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingShowable.swift; sourceTree = "<group>"; };
 		75BC13692A32638B002F411C /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
-		75BC136E2A326C57002F411C /* ClassName+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ClassName+Extension.swift"; sourceTree = "<group>"; };
 		75BC13732A327D29002F411C /* SongViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SongViewCell.swift; sourceTree = "<group>"; };
 		75BC13742A327D29002F411C /* SongViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SongViewCell.xib; sourceTree = "<group>"; };
 		75BC13782A327DA9002F411C /* SplashViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashViewController.swift; sourceTree = "<group>"; };
@@ -237,9 +233,10 @@
 			children = (
 				75BC136C2A3265C0002F411C /* App */,
 				75BC13532A324D20002F411C /* Extensions */,
-				75BC13682A326378002F411C /* Module */,
 				75BC135A2A324DBF002F411C /* Utils */,
 				75BC13592A324DAD002F411C /* Views */,
+				75EF31662A39B16F00DB9516 /* Repostories */,
+				75BC13682A326378002F411C /* Modules */,
 				757478E62A311F69002E0E06 /* Main.storyboard */,
 				757478EC2A311F6A002E0E06 /* Assets.xcassets */,
 				757478EE2A311F6A002E0E06 /* LaunchScreen.storyboard */,
@@ -253,7 +250,6 @@
 			isa = PBXGroup;
 			children = (
 				75FC20702A3B3219003F43F0 /* Mock */,
-				757478FA2A311F6A002E0E06 /* ITunesAppTests.swift */,
 			);
 			path = ITunesAppTests;
 			sourceTree = "<group>";
@@ -277,7 +273,6 @@
 		75BC133F2A323511002F411C /* SearchModule */ = {
 			isa = PBXGroup;
 			children = (
-				75BC13722A326DE8002F411C /* Entity */,
 				75BC13702A326DB2002F411C /* Cells */,
 				757478E42A311F69002E0E06 /* SearchViewController.swift */,
 				75F07EB32A33A406005848C0 /* SearchViewController.storyboard */,
@@ -307,7 +302,6 @@
 			children = (
 				75BC13542A324D3B002F411C /* UICollectionView+Extansion.swift */,
 				75BC13562A324D5F002F411C /* UICollectionViewCell+Extansion.swift */,
-				75BC136E2A326C57002F411C /* ClassName+Extension.swift */,
 				7552F03E2A3787F4001D1EAD /* String+Extension.swift */,
 				7552F0432A3793C4001D1EAD /* UIImage+Extension.swift */,
 				7552F0452A3798C2001D1EAD /* UIView+Extension.swift */,
@@ -333,17 +327,16 @@
 			path = Utils;
 			sourceTree = "<group>";
 		};
-		75BC13682A326378002F411C /* Module */ = {
+		75BC13682A326378002F411C /* Modules */ = {
 			isa = PBXGroup;
 			children = (
-				75EF31662A39B16F00DB9516 /* Repostories */,
 				7552F0492A392C37001D1EAD /* FavoritesModule */,
 				75BC136D2A326BE2002F411C /* SplashModule */,
 				75BC133F2A323511002F411C /* SearchModule */,
 				75BC13402A323541002F411C /* DetailModule */,
 				75BC136B2A3263A6002F411C /* Base */,
 			);
-			path = Module;
+			path = Modules;
 			sourceTree = "<group>";
 		};
 		75BC136B2A3263A6002F411C /* Base */ = {
@@ -389,13 +382,6 @@
 				75FC206E2A3B2ADF003F43F0 /* ProgressBarView.swift */,
 			);
 			path = Views;
-			sourceTree = "<group>";
-		};
-		75BC13722A326DE8002F411C /* Entity */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Entity;
 			sourceTree = "<group>";
 		};
 		75BC13772A327D6E002F411C /* SongViewCell */ = {
@@ -643,7 +629,6 @@
 				75BC135E2A324E1B002F411C /* LoadingShowable.swift in Sources */,
 				75BC13572A324D5F002F411C /* UICollectionViewCell+Extansion.swift in Sources */,
 				75BC13462A3235DB002F411C /* SearchInteractor.swift in Sources */,
-				75BC136F2A326C57002F411C /* ClassName+Extension.swift in Sources */,
 				75FC206F2A3B2ADF003F43F0 /* ProgressBarView.swift in Sources */,
 				75BC137A2A327DA9002F411C /* SplashViewController.swift in Sources */,
 			);
@@ -660,7 +645,6 @@
 				75BC1D982A3B71E700376EB6 /* MockDetailInteractor.swift in Sources */,
 				75BC1D9C2A3B781700376EB6 /* MockDetailPresenterTest.swift in Sources */,
 				75FC207C2A3B3BB4003F43F0 /* MockSearchRouter.swift in Sources */,
-				757478FB2A311F6A002E0E06 /* ITunesAppTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

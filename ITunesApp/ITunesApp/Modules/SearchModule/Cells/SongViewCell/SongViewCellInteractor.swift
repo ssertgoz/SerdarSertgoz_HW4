@@ -11,6 +11,7 @@ import MusicPlayer
 protocol SongViewCellInteractorProtocol: AnyObject{
     func playMusic(url: String)
     func pauseMusic()
+    func continueToPlay()
 }
 
 protocol SongViewCellInteractorOutputProtocol: AnyObject{
@@ -46,6 +47,11 @@ final class SongViewCellInteractor{
 
 
 extension SongViewCellInteractor: SongViewCellInteractorProtocol{
+    func continueToPlay() {
+        musicPlayer.continouToPlay()
+        timer = Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: #selector(updateProgressView), userInfo: nil, repeats: true)
+    }
+    
     
     func pauseMusic() {
         musicPlayer.pause()

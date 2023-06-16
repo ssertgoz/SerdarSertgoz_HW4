@@ -13,11 +13,13 @@ protocol FavoritesPresenterProtocol: AnyObject{
     var numberOfItems: Int { get }
     func songAt(index: Int) -> SongEntity?
     func didSelectRowAt(index: Int)
+    func calculateCellHeight(collectionViewWidth: Double) -> (width: Double, height: Double) 
 }
 
 extension FavoritesPresenter {
     fileprivate enum Constants {
         static let cellCornerRadius: Double = 12
+        static let cellHeightFactor: Double = 3.5
         static let navigationTitle: String = "Favorites"
         static let backButonText: String = "Back"
     }
@@ -41,6 +43,10 @@ extension FavoritesPresenter: FavoritesPresenterProtocol{
     func didSelectRowAt(index: Int) {
         guard let source = songAt(index: index) else { return }
         router?.navigateTo(.detailScreen(source: source))
+    }
+    
+    func calculateCellHeight(collectionViewWidth: Double) -> (width: Double, height: Double) {
+        (collectionViewWidth, collectionViewWidth/Constants.cellHeightFactor)
     }
     
     func songAt(index: Int) -> SongEntity? {

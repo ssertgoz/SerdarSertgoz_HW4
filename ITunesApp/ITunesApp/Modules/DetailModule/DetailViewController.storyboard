@@ -115,12 +115,27 @@
                                     <constraint firstAttribute="height" constant="85" id="fYl-6y-Y4Y"/>
                                 </constraints>
                             </imageView>
+                            <imageView clipsSubviews="YES" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="gobackward.5" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="qj3-hM-5sf">
+                                <rect key="frame" x="45" y="742" width="84" height="50.666666666666629"/>
+                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="n2m-QB-GKZ"/>
+                                </constraints>
+                            </imageView>
+                            <imageView clipsSubviews="YES" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="goforward.5" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="Nsm-ey-BQN">
+                                <rect key="frame" x="264" y="742" width="84" height="50.666666666666629"/>
+                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="qJ0-gU-vO9"/>
+                                </constraints>
+                            </imageView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="O4t-5Z-CbN" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="20" id="04m-Wa-tTG"/>
                             <constraint firstItem="gJB-vx-da1" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="154" id="2zs-vd-IVm"/>
+                            <constraint firstItem="Nsm-ey-BQN" firstAttribute="bottom" secondItem="vDu-zF-Fre" secondAttribute="bottom" constant="-25" id="8us-x0-Shz"/>
                             <constraint firstItem="oVg-NY-dHZ" firstAttribute="top" secondItem="5EZ-qb-Rvc" secondAttribute="top" id="CBE-c1-1VB"/>
                             <constraint firstItem="eqY-r4-hwj" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" constant="12" id="E5q-Gy-JGT"/>
                             <constraint firstItem="eqY-r4-hwj" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="12" id="ErO-fA-ZZo"/>
@@ -131,13 +146,16 @@
                             <constraint firstItem="oVg-NY-dHZ" firstAttribute="trailing" secondItem="vDu-zF-Fre" secondAttribute="trailing" id="Npx-eu-jnn"/>
                             <constraint firstItem="gJB-vx-da1" firstAttribute="top" secondItem="L27-5E-UdH" secondAttribute="bottom" constant="20" id="OxB-ey-Hs8"/>
                             <constraint firstItem="bAv-ef-Bl2" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="20" id="RmC-4J-Hif"/>
+                            <constraint firstItem="qj3-hM-5sf" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="45" id="S4l-Eq-i7r"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="gJB-vx-da1" secondAttribute="trailing" constant="154" id="TDq-PY-1nU"/>
                             <constraint firstItem="RaY-Bd-ufD" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="66" id="THN-2j-f1R"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="L27-5E-UdH" secondAttribute="trailing" constant="20" id="TS7-nQ-i3p"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="eqY-r4-hwj" secondAttribute="trailing" constant="12" id="Tey-WN-TJi"/>
+                            <constraint firstItem="gJB-vx-da1" firstAttribute="leading" secondItem="qj3-hM-5sf" secondAttribute="trailing" constant="25" id="UkY-gp-g8k"/>
                             <constraint firstItem="L27-5E-UdH" firstAttribute="top" secondItem="O4t-5Z-CbN" secondAttribute="bottom" constant="12" id="V3R-yH-9nx"/>
                             <constraint firstItem="bAv-ef-Bl2" firstAttribute="top" secondItem="eqY-r4-hwj" secondAttribute="bottom" constant="12" id="VPN-IV-9iB"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="bAv-ef-Bl2" secondAttribute="trailing" constant="20" id="W0k-4J-bhO"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="Nsm-ey-BQN" secondAttribute="trailing" constant="45" id="Y0p-6F-ACJ"/>
                             <constraint firstItem="L27-5E-UdH" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="20" id="Z3x-XC-ZlT"/>
                             <constraint firstItem="CHO-VE-9RD" firstAttribute="trailing" secondItem="vDu-zF-Fre" secondAttribute="trailing" id="Zfo-Nq-M4h"/>
                             <constraint firstItem="CHO-VE-9RD" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="aNs-Nt-c0v"/>
@@ -148,6 +166,8 @@
                             <constraint firstItem="O4t-5Z-CbN" firstAttribute="top" secondItem="RaY-Bd-ufD" secondAttribute="bottom" constant="20" id="fhx-Ai-XFj"/>
                             <constraint firstItem="CHO-VE-9RD" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="mNo-jt-Dfu"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="bottom" secondItem="gJB-vx-da1" secondAttribute="bottom" constant="12" id="mjU-GQ-n3t"/>
+                            <constraint firstItem="qj3-hM-5sf" firstAttribute="bottom" secondItem="vDu-zF-Fre" secondAttribute="bottom" constant="-25" id="qeN-cu-zTw"/>
+                            <constraint firstItem="Nsm-ey-BQN" firstAttribute="leading" secondItem="gJB-vx-da1" secondAttribute="trailing" constant="25" id="tJn-lj-3aP"/>
                             <constraint firstItem="L27-5E-UdH" firstAttribute="top" secondItem="xQQ-ig-oUU" secondAttribute="bottom" constant="12" id="uG2-Lq-RrQ"/>
                             <constraint firstAttribute="bottom" secondItem="CHO-VE-9RD" secondAttribute="bottom" id="upJ-nf-SiH"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="RaY-Bd-ufD" secondAttribute="trailing" constant="66" id="zKc-3K-oQE"/>
@@ -160,6 +180,8 @@
                         <outlet property="collectionPriceLabel" destination="pHl-MB-gnd" id="wDo-Uv-Aq3"/>
                         <outlet property="colorView" destination="CHO-VE-9RD" id="Y3P-Gq-rYW"/>
                         <outlet property="genreNameLabel" destination="DEZ-Kh-gN4" id="Qmt-42-rAv"/>
+                        <outlet property="goBackwardImageView" destination="qj3-hM-5sf" id="1RQ-qy-lXd"/>
+                        <outlet property="goForwardImageView" destination="Nsm-ey-BQN" id="dLw-EW-GZ0"/>
                         <outlet property="gradientView" destination="oVg-NY-dHZ" id="Hkv-mA-oZp"/>
                         <outlet property="likeImageButton" destination="xQQ-ig-oUU" id="dd4-Or-KwH"/>
                         <outlet property="playImageButton" destination="gJB-vx-da1" id="mtL-h8-Heu"/>
@@ -175,6 +197,8 @@
         </scene>
     </scenes>
     <resources>
+        <image name="gobackward.5" catalog="system" width="119" height="128"/>
+        <image name="goforward.5" catalog="system" width="119" height="128"/>
         <image name="heart.fill" catalog="system" width="128" height="107"/>
         <image name="play.fill" catalog="system" width="117" height="128"/>
     </resources>

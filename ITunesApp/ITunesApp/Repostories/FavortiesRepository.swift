@@ -16,7 +16,7 @@ protocol FavoritesRepositoryProtocol{
     func deleteFavorite(trackId: Int)
 }
 
-class FavoriteRepository : FavoritesRepositoryProtocol{
+final class FavoriteRepository : FavoritesRepositoryProtocol{
     
     static let shared = FavoriteRepository()
     
