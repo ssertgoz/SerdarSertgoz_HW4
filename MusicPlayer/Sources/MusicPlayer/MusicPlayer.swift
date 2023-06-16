@@ -8,11 +8,13 @@ public protocol MusicPlayerProtocol: AnyObject{
     func getPlayer() -> AVPlayer?
     func getTotalDuration() -> String?
     func getCurrentTime() -> String?
+    func setCurentTime(second: Int, isForward: Bool)
+    func continouToPlay()
 }
 
-public class MusicPlayer: MusicPlayerProtocol {
+public final class MusicPlayer: MusicPlayerProtocol {
     public static let shared = MusicPlayer()
-    private var player: AVPlayer?
+    public var player: AVPlayer?
     
     public init() {
     }
@@ -24,7 +26,11 @@ public class MusicPlayer: MusicPlayerProtocol {
         
         let playerItem:AVPlayerItem = AVPlayerItem(url: mp3URL)
         player = AVPlayer(playerItem: playerItem)
-        player!.play()
+        player?.play()
+    }
+    
+    public func continouToPlay(){
+        player?.play()
     }
     
     public func pause(){
@@ -33,6 +39,15 @@ public class MusicPlayer: MusicPlayerProtocol {
     
     public func getPlayer() -> AVPlayer? {
         return player
+    }
+    
+    public func setCurentTime(second: Int, isForward: Bool){
+        let time = player!.currentTime() // Get the current time of the player
+        let timeToAdd = CMTime(seconds: isForward ? 5 : -5, preferredTimescale: time.timescale) // Create a CMTime object for 5 seconds
+        let newTime = time + timeToAdd // Add it to the current time
+        player!.seek(to: newTime)
+        player!.play()
+        
     }
     
     public func getTotalDuration() -> String? {
